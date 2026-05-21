@@ -6,456 +6,219 @@
 <title>zero</title>
 <style>
 :root {
-  --bg: #f0f2f5;
-  --bg2: #ffffff;
-  --bg3: #e4e6eb;
-  --text: #1c1e21;
-  --text2: #65676b;
-  --primary: #3b82f6;
-  --primary-hover: #2563eb;
-  --border: #dadde1;
-  --shadow: rgba(0,0,0,0.08);
+  --bg: #f0f2f5;--bg2: #ffffff;--bg3: #e4e6eb;
+  --text: #1c1e21;--text2: #65676b;
+  --primary: #3b82f6;--primary-hover: #2563eb;
+  --border: #dadde1;--shadow: rgba(0,0,0,0.08);
   --shadow-hover: rgba(59,130,246,0.2);
-  --hover-bg: rgba(0,0,0,0.04);
-  --card-bg: #fff;
-  --input-bg: #f0f2f5;
-  --danger: #e74c3c;
-  --success: #22c55e;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --hover-bg: rgba(0,0,0,0.04);--card-bg: #fff;
+  --input-bg: #f0f2f5;--danger: #e74c3c;--success: #22c55e;
+  --radius: 12px;--radius-sm: 8px;
   --transition: 0.3s cubic-bezier(.4,0,.2,1);
 }
 [data-theme="dark"] {
-  --bg: #18191a;
-  --bg2: #242526;
-  --bg3: #3a3b3c;
-  --text: #e4e6eb;
-  --text2: #b0b3b8;
-  --border: #3e4042;
-  --shadow: rgba(0,0,0,0.3);
+  --bg: #18191a;--bg2: #242526;--bg3: #3a3b3c;
+  --text: #e4e6eb;--text2: #b0b3b8;
+  --border: #3e4042;--shadow: rgba(0,0,0,0.3);
   --shadow-hover: rgba(59,130,246,0.3);
-  --hover-bg: rgba(255,255,255,0.06);
-  --card-bg: #242526;
-  --input-bg: #3a3b3c;
-  --primary: #4a8af4;
+  --hover-bg: rgba(255,255,255,0.06);--card-bg: #242526;
+  --input-bg: #3a3b3c;--primary: #4a8af4;
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Segoe UI',system-ui,sans-serif;
-  background:var(--bg);color:var(--text);
-  transition:background var(--transition),color var(--transition);
-  min-height:100vh;overflow-x:hidden;
-}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background var(--transition),color var(--transition);min-height:100vh;overflow-x:hidden}
 button,input{font-family:inherit;font-size:14px;outline:none;border:none}
 a{text-decoration:none;color:inherit}
 
-/* === LOGIN SCREEN === */
-#loginScreen{
-  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-  background:var(--bg);z-index:1000;
-  transition:opacity .5s,transform .5s;
-}
+/* === LOGIN === */
+#loginScreen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:1000;transition:opacity .5s,transform .5s}
 #loginScreen.hidden{opacity:0;transform:scale(1.05);pointer-events:none}
-.login-card{
-  background:var(--bg2);border-radius:20px;padding:48px 40px 40px;
-  width:380px;text-align:center;
-  box-shadow:0 2px 40px var(--shadow);
-  border:1px solid var(--border);
-  transition:all var(--transition);
-}
-.login-card .logo{
-  font-size:52px;font-weight:900;
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  letter-spacing:-2px;margin-bottom:6px;
-}
-.login-card .sub{font-size:13px;color:var(--text2);margin-bottom:32px}
-.login-btn{
-  width:100%;padding:13px;border-radius:var(--radius);
-  background:#fff;border:1px solid var(--border);
-  color:var(--text);font-size:15px;font-weight:600;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
-  transition:all var(--transition);
-}
-.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--shadow-hover);border-color:var(--primary)}
-.login-btn:active{transform:scale(.97)}
-.login-btn svg{width:20px;height:20px}
-.login-btn .pill{display:inline-block;padding:1px 8px;border-radius:10px;background:#e8f0fe;color:#1a73e8;font-size:11px;font-weight:700;margin-left:4px}
-.sep{display:flex;align-items:center;gap:12px;margin:18px 0;font-size:12px;color:var(--text2)}
-.sep::before,.sep::after{content:'';flex:1;height:1px;background:var(--border)}
-.login-input{
-  width:100%;padding:12px 14px;border-radius:var(--radius-sm);
-  background:var(--input-bg);color:var(--text);
-  border:1px solid var(--border);margin-bottom:10px;
-  transition:border var(--transition);
-}
-.login-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
-.login-submit{
-  width:100%;padding:12px;border-radius:var(--radius-sm);
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  color:#fff;font-weight:700;font-size:15px;cursor:pointer;
-  transition:all var(--transition);margin-top:4px;
-}
-.login-submit:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--shadow-hover)}
-.login-submit:active{transform:scale(.97)}
+.login-card{background:var(--bg2);border-radius:20px;width:400px;text-align:center;box-shadow:0 2px 40px var(--shadow);border:1px solid var(--border);transition:all var(--transition);overflow:hidden}
+.login-step{display:none;padding:32px 40px;background:var(--bg2)}
+.login-step.active{display:block}
+.ls-title{font-size:22px;font-weight:400;color:var(--text);margin-bottom:4px}
+.ls-sub{font-size:14px;color:var(--text2);margin-bottom:24px}
+.ls-glogo{display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.ls-glogo svg{width:60px;height:20px}
+.ls-account{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--border);border-radius:48px;cursor:pointer;transition:all .2s;margin-bottom:6px;width:100%;background:none;text-align:left;color:var(--text)}
+.ls-account:hover{background:var(--hover-bg)}
+.ls-account .la-av{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--primary),#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px}
+.ls-account .la-info{flex:1;min-width:0}
+.ls-account .la-info .la-name{font-size:13px;font-weight:500}
+.ls-account .la-info .la-email{font-size:11px;color:var(--text2)}
+.ls-other{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:48px;cursor:pointer;transition:all .2s;width:100%;border:none;background:none;font-size:13px;font-weight:500;color:var(--primary)}
+.ls-other:hover{background:var(--hover-bg)}
+.ls-other .lo-plus{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text2);flex-shrink:0}
+.ls-back{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--text2);cursor:pointer;margin-bottom:16px;padding:4px 8px;border-radius:6px;transition:all .2s;border:none;background:none}
+.ls-back:hover{background:var(--hover-bg);color:var(--text)}
+.ls-back .lb-icon{font-size:16px}
+.ls-pw-wrap{position:relative;margin-bottom:4px;text-align:left}
+.ls-pw-wrap input{width:100%;padding:14px 14px 4px;border-radius:4px;border:1px solid var(--border);font-size:15px;color:var(--text);background:var(--bg2);transition:border .2s;outline:none}
+.ls-pw-wrap input:focus{border-color:var(--primary)}
+.ls-pw-wrap label{position:absolute;left:14px;top:14px;font-size:15px;color:var(--text2);transition:all .15s;pointer-events:none;background:var(--bg2);padding:0 2px}
+.ls-pw-wrap input:focus+label,.ls-pw-wrap input:not(:placeholder-shown)+label{top:-6px;font-size:11px;color:var(--primary)}
+.ls-pw-forgot{display:block;text-align:left;font-size:12px;color:var(--primary);margin-top:4px;cursor:pointer}
+.ls-pw-forgot:hover{text-decoration:underline}
+.ls-next{padding:8px 28px;border-radius:4px;background:var(--primary);color:#fff;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all .2s;float:right;margin-top:18px}
+.ls-next:hover{box-shadow:0 2px 8px var(--shadow-hover);filter:brightness(1.08)}
+.ls-next:active{transform:scale(.97)}
+.ls-footer{font-size:11px;color:var(--text2);text-align:center;margin-top:28px;clear:both}
+.ls-footer a{color:var(--primary);cursor:pointer}
+.ls-footer a:hover{text-decoration:underline}
+.ls-loading{text-align:center;padding:20px 0}
+.ls-spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ls-email-bar{display:flex;align-items:center;gap:6px;justify-content:center;font-size:13px;color:var(--text2);margin-bottom:20px;cursor:pointer;padding:6px 12px;border-radius:8px;transition:background .2s;border:none;background:none}
+.ls-email-bar:hover{background:var(--hover-bg)}
+.ls-email-bar .eb-icon{font-size:14px}
 
-/* === APP LAYOUT === */
+/* === APP === */
 #appScreen{display:none;height:100vh;width:100vw}
 #appScreen.active{display:flex}
-
-/* === SIDEBAR === */
-.sidebar{
-  width:280px;min-width:280px;
-  background:var(--bg2);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  transition:all var(--transition);
-  position:relative;
-}
-.sidebar-header{
-  padding:16px 18px;font-size:24px;font-weight:900;
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  letter-spacing:-1px;border-bottom:1px solid var(--border);
-}
+.sidebar{width:280px;min-width:280px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;transition:all var(--transition)}
+.sidebar-header{padding:16px 18px;font-size:24px;font-weight:900;background:linear-gradient(135deg,var(--primary),#6366f1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;border-bottom:1px solid var(--border)}
 .sidebar-menu{flex:1;padding:8px 10px;overflow-y:auto}
-.menu-item{
-  display:flex;align-items:center;gap:12px;
-  padding:11px 14px;border-radius:var(--radius-sm);
-  cursor:pointer;font-weight:600;font-size:14px;
-  color:var(--text2);transition:all var(--transition);
-  margin-bottom:2px;
-}
+.menu-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--radius-sm);cursor:pointer;font-weight:600;font-size:14px;color:var(--text2);transition:all var(--transition);margin-bottom:2px}
 .menu-item:hover{background:var(--hover-bg);color:var(--text);transform:translateX(3px)}
 .menu-item.active{background:rgba(59,130,246,0.1);color:var(--primary)}
 .menu-item .icon{width:24px;text-align:center;font-size:18px}
-.theme-toggle-side{
-  display:flex;align-items:center;gap:12px;
-  padding:11px 14px;border-radius:var(--radius-sm);
-  cursor:pointer;font-weight:500;font-size:13px;
-  color:var(--text2);transition:all var(--transition);
-  margin:4px 0;
-}
+.theme-toggle-side{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:var(--radius-sm);cursor:pointer;font-weight:500;font-size:13px;color:var(--text2);transition:all var(--transition);margin:4px 0}
 .theme-toggle-side:hover{background:var(--hover-bg);color:var(--text)}
-
-/* Profile in sidebar bottom */
-.sidebar-profile{
-  border-top:1px solid var(--border);padding:10px 14px;
-  display:flex;align-items:center;gap:10px;cursor:pointer;
-  transition:all var(--transition);position:relative;
-}
+.sidebar-profile{border-top:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all var(--transition)}
 .sidebar-profile:hover{background:var(--hover-bg)}
-.sidebar-profile .avatar{
-  width:36px;height:36px;border-radius:50%;object-fit:cover;
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-weight:700;font-size:15px;flex-shrink:0;
-}
+.sidebar-profile .avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,var(--primary),#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex-shrink:0}
 .sidebar-profile .info{flex:1;min-width:0}
 .sidebar-profile .name{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sidebar-profile .email{font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* === MAIN CONTENT === */
-.main-content{
-  flex:1;display:flex;flex-direction:column;
-  background:var(--bg);position:relative;
-}
+.main-content{flex:1;display:flex;flex-direction:column;background:var(--bg);position:relative}
 .page{display:none;flex:1;padding:0}
 .page.active{display:flex;flex-direction:column}
 
-/* === MESSAGES PAGE === */
+/* === MESSAGES === */
 .messages-layout{display:flex;flex:1;height:100%}
-.friend-list{
-  width:300px;min-width:300px;
-  border-right:1px solid var(--border);
-  background:var(--bg2);display:flex;flex-direction:column;
-}
-.friend-list-header{
-  padding:16px 18px;font-weight:700;font-size:16px;
-  border-bottom:1px solid var(--border);
-}
-.friend-search{
-  padding:8px 12px;
-}
-.friend-search input{
-  width:100%;padding:8px 12px;border-radius:20px;
-  background:var(--input-bg);color:var(--text);
-  border:1px solid var(--border);font-size:13px;
-  transition:border var(--transition);
-}
+.friend-list{width:300px;min-width:300px;border-right:1px solid var(--border);background:var(--bg2);display:flex;flex-direction:column}
+.friend-list-header{padding:16px 18px;font-weight:700;font-size:16px;border-bottom:1px solid var(--border)}
+.friend-search{padding:8px 12px}
+.friend-search input{width:100%;padding:8px 12px;border-radius:20px;background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:13px;transition:border var(--transition)}
 .friend-search input:focus{border-color:var(--primary)}
 .friend-items{flex:1;overflow-y:auto;padding:4px 0}
-.friend-item{
-  display:flex;align-items:center;gap:10px;
-  padding:8px 14px;cursor:pointer;transition:all var(--transition);
-}
+.friend-item{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;transition:all var(--transition)}
 .friend-item:hover{background:var(--hover-bg)}
 .friend-item.active{background:rgba(59,130,246,0.08)}
-.friend-item .avatar{
-  width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-weight:700;font-size:14px;
-}
+.friend-item .avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;background:linear-gradient(135deg,var(--primary),#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
 .friend-item .f-info{flex:1;min-width:0}
 .friend-item .f-name{font-weight:600;font-size:13px}
 .friend-item .f-email{font-size:11px;color:var(--text2)}
 .friend-item .f-status{width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0}
-.no-friends{
-  text-align:center;padding:40px 20px;color:var(--text2);font-size:13px;line-height:1.7;
-}
+.no-friends{text-align:center;padding:40px 20px;color:var(--text2);font-size:13px;line-height:1.7}
 .no-friends strong{color:var(--primary);cursor:pointer}
 .no-friends strong:hover{text-decoration:underline}
-
-.chat-area{
-  flex:1;display:flex;flex-direction:column;background:var(--bg);
-}
-.chat-header{
-  padding:12px 18px;font-weight:700;font-size:15px;
-  border-bottom:1px solid var(--border);background:var(--bg2);
-  display:flex;align-items:center;gap:10px;
-}
-.chat-header .avatar{
-  width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-weight:700;font-size:12px;
-}
-.chat-messages{
-  flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px;
-}
+.chat-area{flex:1;display:flex;flex-direction:column;background:var(--bg)}
+.chat-header{padding:12px 18px;font-weight:700;font-size:15px;border-bottom:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:10px}
+.chat-header .avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;background:linear-gradient(135deg,var(--primary),#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
 .msg{max-width:70%;padding:8px 14px;border-radius:18px;font-size:13px;line-height:1.5;word-break:break-word}
 .msg.sent{background:var(--primary);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
 .msg.received{background:var(--bg3);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
 .msg .time{font-size:10px;opacity:.6;margin-top:3px;text-align:right}
-.msg.file-msg{
-  background:var(--bg2);border:1px solid var(--border);cursor:pointer;
-  display:flex;align-items:center;gap:8px;padding:10px 14px;
-}
+.msg.file-msg{background:var(--bg2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 14px}
 .msg.file-msg:hover{border-color:var(--primary)}
 .msg.file-msg .file-icon{font-size:20px}
 .msg.file-msg .file-info{font-size:11px;color:var(--text2)}
 .msg.file-msg.sent{background:rgba(59,130,246,0.08);border-color:var(--primary)}
-.chat-input-area{
-  display:flex;align-items:center;gap:8px;padding:10px 14px;
-  background:var(--bg2);border-top:1px solid var(--border);
-}
-.chat-input-area input{
-  flex:1;padding:9px 14px;border-radius:20px;
-  background:var(--input-bg);color:var(--text);
-  border:1px solid var(--border);font-size:13px;
-  transition:border var(--transition);
-}
+.chat-input-area{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg2);border-top:1px solid var(--border)}
+.chat-input-area input{flex:1;padding:9px 14px;border-radius:20px;background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:13px;transition:border var(--transition)}
 .chat-input-area input:focus{border-color:var(--primary)}
-.chat-input-area .cbtn{
-  width:36px;height:36px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all var(--transition);
-  background:var(--primary);color:#fff;font-size:16px;flex-shrink:0;
-}
+.chat-input-area .cbtn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--transition);background:var(--primary);color:#fff;font-size:16px;flex-shrink:0}
 .chat-input-area .cbtn:hover{transform:scale(1.08);box-shadow:0 4px 12px var(--shadow-hover)}
 .chat-input-area .cbtn.attach{background:var(--bg3);color:var(--text2)}
 .chat-input-area .cbtn.attach:hover{background:var(--primary);color:#fff}
-.chat-placeholder{
-  flex:1;display:flex;align-items:center;justify-content:center;
-  color:var(--text2);font-size:14px;text-align:center;padding:40px;
-  line-height:1.7;
-}
+.chat-placeholder{flex:1;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:14px;text-align:center;padding:40px;line-height:1.7}
 
-/* === FRIENDS PAGE === */
+/* === FRIENDS === */
 .friends-content{padding:20px;flex:1;overflow-y:auto}
 .friends-content h3{font-size:16px;margin-bottom:14px}
-.add-friend-card{
-  background:var(--bg2);border-radius:var(--radius);
-  border:1px solid var(--border);padding:18px;
-  margin-bottom:16px;transition:all var(--transition);
-}
+.add-friend-card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:16px;transition:all var(--transition)}
 .add-friend-card:hover{box-shadow:0 4px 16px var(--shadow);transform:translateY(-2px)}
 .add-friend-card .label{font-weight:600;font-size:13px;margin-bottom:8px}
 .add-friend-card .row{display:flex;gap:8px}
-.add-friend-card input{
-  flex:1;padding:10px 14px;border-radius:var(--radius-sm);
-  background:var(--input-bg);color:var(--text);
-  border:1px solid var(--border);font-size:13px;
-  transition:border var(--transition);
-}
+.add-friend-card input{flex:1;padding:10px 14px;border-radius:var(--radius-sm);background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:13px;transition:border var(--transition)}
 .add-friend-card input:focus{border-color:var(--primary)}
-.add-friend-card .add-btn{
-  padding:10px 20px;border-radius:var(--radius-sm);
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  color:#fff;font-weight:700;font-size:13px;cursor:pointer;
-  transition:all var(--transition);white-space:nowrap;
-}
+.add-friend-card .add-btn{padding:10px 20px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--primary),#6366f1);color:#fff;font-weight:700;font-size:13px;cursor:pointer;transition:all var(--transition);white-space:nowrap}
 .add-friend-card .add-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--shadow-hover)}
+.add-friend-card .add-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .friends-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.friend-card{
-  background:var(--bg2);border-radius:var(--radius);
-  border:1px solid var(--border);padding:16px;text-align:center;
-  transition:all var(--transition);cursor:pointer;
-}
+.friend-card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);padding:16px;text-align:center;transition:all var(--transition);cursor:pointer}
 .friend-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px var(--shadow-hover);border-color:var(--primary)}
-.friend-card .avatar{
-  width:56px;height:56px;border-radius:50%;object-fit:cover;margin:0 auto 8px;
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-weight:700;font-size:20px;
-}
+.friend-card .avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;margin:0 auto 8px;background:linear-gradient(135deg,var(--primary),#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px}
 .friend-card .fname{font-weight:700;font-size:14px}
 .friend-card .femail{font-size:11px;color:var(--text2);margin-top:2px}
 .friend-card .factions{margin-top:10px;display:flex;gap:6px;justify-content:center}
-.friend-card .fbtn{
-  padding:6px 14px;border-radius:6px;font-size:11px;font-weight:700;
-  cursor:pointer;transition:all var(--transition);
-}
+.friend-card .fbtn{padding:6px 14px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;transition:all var(--transition)}
 .friend-card .fbtn.msg{background:rgba(59,130,246,0.1);color:var(--primary)}
 .friend-card .fbtn.msg:hover{background:var(--primary);color:#fff}
 .friend-card .fbtn.del{background:rgba(231,76,60,0.1);color:var(--danger)}
 .friend-card .fbtn.del:hover{background:var(--danger);color:#fff}
+.friend-card .fbtn.del:disabled{opacity:.3;cursor:not-allowed}
+.friend-card .fbtn.del:disabled:hover{background:rgba(231,76,60,0.1);color:var(--danger)}
 
-/* === DROP PAGE === */
+/* === DROP === */
 .drop-content{flex:1;padding:20px;overflow-y:auto}
-.drop-card{
-  background:var(--bg2);border-radius:var(--radius);
-  border:1px solid var(--border);padding:24px;text-align:center;
-  transition:all var(--transition);
-}
+.drop-card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);padding:24px;text-align:center;transition:all var(--transition)}
 .drop-card:hover{box-shadow:0 4px 20px var(--shadow);transform:translateY(-3px)}
-.drop-zone{
-  border:2px dashed var(--border);border-radius:var(--radius);
-  padding:40px 20px;margin-bottom:16px;cursor:pointer;
-  transition:all var(--transition);position:relative;
-}
+.drop-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:40px 20px;margin-bottom:16px;cursor:pointer;transition:all var(--transition)}
 .drop-zone:hover,.drop-zone.dragover{border-color:var(--primary);background:rgba(59,130,246,0.04)}
 .drop-zone .icon{font-size:48px;margin-bottom:8px}
 .drop-zone .text{font-weight:600;font-size:14px;color:var(--text2)}
 .drop-zone .sub{font-size:11px;color:var(--text2);margin-top:4px}
-.drop-file-info{
-  display:flex;align-items:center;gap:10px;padding:10px 14px;
-  background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:14px;
-  text-align:left;
-}
+.drop-file-info{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:14px;text-align:left}
 .drop-file-info .icon{font-size:24px}
 .drop-file-info .info{flex:1;min-width:0}
 .drop-file-info .name{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .drop-file-info .size{font-size:11px;color:var(--text2)}
 .drop-file-info .remove{cursor:pointer;color:var(--danger);font-weight:700;font-size:16px;padding:4px;transition:all var(--transition)}
 .drop-file-info .remove:hover{transform:scale(1.2)}
-.drop-select-friend{width:100%;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:12px;
-  background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:13px;
-  transition:border var(--transition);cursor:pointer;
-}
+.drop-select-friend{width:100%;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:12px;background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:13px;transition:border var(--transition);cursor:pointer}
 .drop-select-friend:focus{border-color:var(--primary)}
-.drop-send-btn{
-  width:100%;padding:12px;border-radius:var(--radius-sm);
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  color:#fff;font-weight:700;font-size:14px;cursor:pointer;
-  transition:all var(--transition);
-}
+.drop-send-btn{width:100%;padding:12px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--primary),#6366f1);color:#fff;font-weight:700;font-size:14px;cursor:pointer;transition:all var(--transition)}
 .drop-send-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--shadow-hover)}
 .drop-send-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
 .drop-history{margin-top:16px;text-align:left}
 .drop-history h4{font-size:13px;color:var(--text2);margin-bottom:8px}
-.drop-item{
-  display:flex;align-items:center;gap:10px;padding:8px 12px;
-  background:var(--bg2);border-radius:var(--radius-sm);
-  border:1px solid var(--border);margin-bottom:4px;
-  transition:all var(--transition);
-}
+.drop-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg2);border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:4px;transition:all var(--transition)}
 .drop-item:hover{border-color:var(--primary);transform:translateX(3px)}
 .drop-item .icon{font-size:18px}
 .drop-item .info{flex:1;min-width:0}
-.drop-item .name{font-weight:600;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drop-item .name{font-weight:600;font-size:12px}
 .drop-item .meta{font-size:10px;color:var(--text2)}
 
-/* === SETTINGS PAGE === */
+/* === SETTINGS === */
 .settings-content{flex:1;padding:20px;overflow-y:auto;max-width:600px}
 .settings-content h3{font-size:16px;margin-bottom:16px}
-.settings-card{
-  background:var(--bg2);border-radius:var(--radius);
-  border:1px solid var(--border);padding:18px;
-  margin-bottom:14px;transition:all var(--transition);
-}
+.settings-card{background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:14px;transition:all var(--transition)}
 .settings-card:hover{box-shadow:0 4px 16px var(--shadow);transform:translateY(-2px)}
 .settings-card .label{font-weight:600;font-size:13px;margin-bottom:6px}
 .settings-card .desc{font-size:11px;color:var(--text2);margin-bottom:10px}
 .settings-card .row{display:flex;gap:8px;align-items:center}
-.settings-card input[type="text"]{
-  flex:1;padding:9px 14px;border-radius:var(--radius-sm);
-  background:var(--input-bg);color:var(--text);
-  border:1px solid var(--border);font-size:13px;
-  transition:border var(--transition);
-}
+.settings-card input[type="text"]{flex:1;padding:9px 14px;border-radius:var(--radius-sm);background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:13px;transition:border var(--transition)}
 .settings-card input[type="text"]:focus{border-color:var(--primary)}
 .settings-card input[type="file"]{display:none}
-.photo-upload{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 16px;border-radius:var(--radius-sm);
-  background:var(--input-bg);color:var(--text);
-  border:1px solid var(--border);font-size:12px;font-weight:600;
-  cursor:pointer;transition:all var(--transition);
-}
+.photo-upload{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-sm);background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;transition:all var(--transition)}
 .photo-upload:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
-.settings-card .save-btn{
-  padding:9px 20px;border-radius:var(--radius-sm);
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  color:#fff;font-weight:700;font-size:13px;cursor:pointer;
-  transition:all var(--transition);white-space:nowrap;
-}
+.settings-card .save-btn{padding:9px 20px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--primary),#6366f1);color:#fff;font-weight:700;font-size:13px;cursor:pointer;transition:all var(--transition);white-space:nowrap}
 .settings-card .save-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--shadow-hover)}
 .lang-btns{display:flex;gap:8px}
-.lang-btn{
-  padding:8px 20px;border-radius:var(--radius-sm);
-  background:var(--input-bg);color:var(--text);
-  border:1px solid var(--border);font-size:13px;font-weight:600;
-  cursor:pointer;transition:all var(--transition);
-}
+.lang-btn{padding:8px 20px;border-radius:var(--radius-sm);background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:13px;font-weight:600;cursor:pointer;transition:all var(--transition)}
 .lang-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--shadow-hover)}
 .lang-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.avatar-preview{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;
-  background:linear-gradient(135deg,var(--primary),#6366f1);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-weight:700;font-size:28px;
-}
-
-/* === MODAL === */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,0.5);
-  display:none;align-items:center;justify-content:center;z-index:2000;
-  backdrop-filter:blur(4px);
-}
-.modal-overlay.active{display:flex}
-.modal{
-  background:var(--bg2);border-radius:16px;padding:24px;
-  width:400px;max-width:90vw;border:1px solid var(--border);
-  box-shadow:0 20px 60px rgba(0,0,0,0.3);
-  transition:all var(--transition);
-}
-.modal h3{font-size:16px;margin-bottom:12px}
-.modal p{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:16px}
-.modal .modal-btns{display:flex;gap:8px;justify-content:flex-end}
-.modal .modal-btn{
-  padding:8px 18px;border-radius:var(--radius-sm);font-weight:600;font-size:13px;
-  cursor:pointer;transition:all var(--transition);
-}
-.modal .modal-btn.primary{background:var(--primary);color:#fff}
-.modal .modal-btn.primary:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--shadow-hover)}
-.modal .modal-btn.secondary{background:var(--input-bg);color:var(--text)}
-.modal .modal-btn.secondary:hover{background:var(--bg3)}
+.avatar-preview{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;background:linear-gradient(135deg,var(--primary),#6366f1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:28px}
 
 /* === TOAST === */
-.toast{
-  position:fixed;bottom:20px;right:20px;z-index:3000;
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:var(--radius);padding:14px 20px;
-  box-shadow:0 8px 30px var(--shadow);
-  font-size:13px;font-weight:600;
-  transform:translateY(100px);opacity:0;
-  transition:all .4s cubic-bezier(.4,0,.2,1);
-  max-width:360px;
-}
-.toast.show{transform:translateY(0);opacity:1}
-.toast.success{border-left:4px solid var(--success)}
-.toast.error{border-left:4px solid var(--danger)}
+.toast{position:fixed;bottom:20px;right:20px;z-index:3000;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 30px var(--shadow);font-size:13px;font-weight:600;transition:all .4s cubic-bezier(.4,0,.2,1);max-width:360px;overflow:hidden}
+.toast .tb-inner{padding:14px 20px}
+.toast .tb-bar{height:3px;background:var(--success);transition:width 2s linear;width:100%}
+.toast.error .tb-bar{background:var(--danger)}
+.toast{transform:translateY(100px);opacity:0;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1;pointer-events:auto}
 
 /* === SCROLLBAR === */
 ::-webkit-scrollbar{width:6px}
@@ -471,7 +234,8 @@ a{text-decoration:none;color:inherit}
   .sidebar .menu-item .icon{margin:0}
   .sidebar-profile{justify-content:center;padding:8px}
   .friend-list{width:200px;min-width:200px}
-  .login-card{width:340px;padding:32px 24px}
+  .login-card{width:340px}
+  .login-step{padding:24px 24px}
 }
 @media(max-width:500px){
   .messages-layout{flex-direction:column}
@@ -482,45 +246,70 @@ a{text-decoration:none;color:inherit}
 </head>
 <body>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast"><div class="tb-inner" id="toastText"></div><div class="tb-bar" id="toastBar"></div></div>
 
 <!-- LOGIN SCREEN -->
 <div id="loginScreen">
   <div class="login-card">
-    <div class="logo">zero</div>
-    <div class="sub" data-tr="zero.giris">Giriş yap ve bağlan</div>
-    <button class="login-btn" onclick="loginWithGoogle()">
-      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59A14.5 14.5 0 0 1 9.5 24c0-1.59.28-3.14.76-4.59l-7.98-6.19A23.99 23.99 0 0 0 0 24c0 3.77.87 7.35 2.56 10.56l7.97-5.97z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 5.97C6.51 42.62 14.62 48 24 48z"/></svg>
-      Google ile Giriş Yap <span class="pill" data-tr="zero.oneri">önerilen</span>
-    </button>
-    <div class="sep" data-tr="zero.veya">veya</div>
-    <input class="login-input" id="loginEmail" type="email" placeholder="Gmail adresin" data-tr="zero.gmail_placeholder">
-    <input class="login-input" id="loginName" type="text" placeholder="İsmin" data-tr="zero.isim_placeholder">
-    <button class="login-submit" onclick="loginWithEmail()" data-tr="zero.giris_btn">Giriş Yap</button>
+    <!-- Step 1: Account picker -->
+    <div class="login-step active" id="ls-step1">
+      <div class="ls-glogo"><svg viewBox="0 0 75 24"><path fill="#4285F4" d="M9.24 12.25c0-.65-.06-1.28-.17-1.89H4.79v3.57h2.53a4.25 4.25 0 0 1-1.84 2.79v2.32h2.98c1.74-1.6 2.74-3.96 2.74-6.79z"/><path fill="#34A853" d="M4.79 20.5c2.48 0 4.56-.82 6.08-2.22l-2.98-2.32c-.83.56-1.88.89-3.1.89-2.38 0-4.4-1.61-5.12-3.77H.63v2.4C2.12 18.49 3.29 20.5 4.79 20.5z"/><path fill="#FBBC05" d="M-.33 13.08c-.2-.65-.32-1.33-.32-2.04s.12-1.39.32-2.04V6.6H-.63C-1.13 7.7-.83 9.3-.83 11.04s0 3.34.2 4.46l2.5-1.94z"/><path fill="#EA4335" d="M4.79 5.28c1.35 0 2.56.46 3.52 1.37l2.63-2.63C9.31 2.3 7.25 1.29 4.79 1.29c-1.5 0-2.67.85-3.16 2.1l2.5 1.94c.72-2.16 2.74-3.77 5.12-3.77z"/></svg></div>
+      <div class="ls-title" id="ls1Title">Oturum aç</div>
+      <div class="ls-sub" id="ls1Sub">Google hesabına devam et</div>
+      <div id="lsSavedAccounts"></div>
+      <button class="ls-other" onclick="lsNewAccount()"><span class="lo-plus">+</span><span>Başka hesap kullan</span></button>
+      <div class="ls-footer"><a href="#">Gizlilik</a> · <a href="#">Şartlar</a></div>
+    </div>
+
+    <!-- Step 2: Password -->
+    <div class="login-step" id="ls-step2">
+      <button class="ls-back" onclick="lsBackToPicker()"><span class="lb-icon">←</span></button>
+      <div class="ls-email-bar" id="lsEmailBar"></div>
+      <div class="ls-pw-wrap">
+        <input type="password" id="lsPassword" placeholder="" onkeydown="if(event.key==='Enter')lsDoLogin()">
+        <label>Şifre</label>
+      </div>
+      <div class="ls-pw-forgot">Şifreni mi unuttun?</div>
+      <button class="ls-next" onclick="lsDoLogin()">İleri</button>
+      <div class="ls-footer"><a href="#">Gizlilik</a> · <a href="#">Şartlar</a></div>
+    </div>
+
+    <!-- Step 3: Loading -->
+    <div class="login-step" id="ls-step3">
+      <div class="ls-loading"><div class="ls-spinner"></div><div class="ls-sub">Giriş yapılıyor...</div></div>
+    </div>
+
+    <!-- Step 4: New account -->
+    <div class="login-step" id="ls-step4">
+      <button class="ls-back" onclick="lsBackToPicker()"><span class="lb-icon">←</span></button>
+      <div class="ls-title">Hesap seç</div>
+      <div class="ls-sub">Yeni bir Gmail adresi gir</div>
+      <input type="email" id="lsNewEmail" placeholder="Gmail adresin" style="width:100%;padding:12px 14px;border-radius:4px;border:1px solid var(--border);font-size:15px;color:var(--text);background:var(--bg2);margin-bottom:8px;outline:none" onkeydown="if(event.key==='Enter')lsCheckNewEmail()">
+      <button class="ls-next" onclick="lsCheckNewEmail()">İleri</button>
+      <div id="lsNewError" style="font-size:12px;color:var(--danger);margin-top:8px;display:none"></div>
+    </div>
   </div>
 </div>
 
 <!-- APP -->
 <div id="appScreen">
-  <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">zero</div>
     <div class="sidebar-menu">
       <div class="menu-item active" data-page="messages" onclick="goPage('messages')">
-        <span class="icon">💬</span><span data-tr="menu.mesajlar">Mesajlar</span>
+        <span class="icon">💬</span><span>Mesajlar</span>
       </div>
       <div class="menu-item" data-page="friends" onclick="goPage('friends')">
-        <span class="icon">👥</span><span data-tr="menu.arkadaslar">Arkadaşlar</span>
+        <span class="icon">👥</span><span>Arkadaşlar</span>
       </div>
       <div class="menu-item" data-page="drop" onclick="goPage('drop')">
-        <span class="icon">📤</span><span data-tr="menu.drop">Drop</span>
+        <span class="icon">📤</span><span>Drop</span>
       </div>
       <div class="menu-item" data-page="settings" onclick="goPage('settings')">
-        <span class="icon">⚙️</span><span data-tr="menu.ayarlar">Ayarlar</span>
+        <span class="icon">⚙️</span><span>Ayarlar</span>
       </div>
       <div class="theme-toggle-side" onclick="toggleTheme()">
-        <span class="icon" id="themeIcon">🌙</span><span id="themeLabel" data-tr="menu.karanlik">Karanlık Mod</span>
+        <span class="icon" id="themeIcon">🌙</span><span id="themeLabel">Karanlık Mod</span>
       </div>
     </div>
     <div class="sidebar-profile" onclick="goPage('settings')">
@@ -532,31 +321,26 @@ a{text-decoration:none;color:inherit}
     </div>
   </div>
 
-  <!-- Main Content -->
   <div class="main-content">
     <!-- MESSAGES -->
     <div class="page active" id="page-messages">
       <div class="messages-layout">
         <div class="friend-list">
-          <div class="friend-list-header" data-tr="msg.arkadaslar">Arkadaşlar</div>
-          <div class="friend-search">
-            <input type="text" placeholder="Ara..." oninput="filterFriends(this.value)" data-tr="msg.ara">
-          </div>
+          <div class="friend-list-header">Arkadaşlar</div>
+          <div class="friend-search"><input type="text" id="friendSearchInput" placeholder="Ara..." oninput="filterFriends(this.value)"></div>
           <div class="friend-items" id="friendItems"></div>
         </div>
         <div class="chat-area" id="chatArea">
-          <div class="chat-placeholder" id="chatPlaceholder">
-            <div data-tr="msg.bos">💬<br><br><strong data-tr="msg.bos2">Arkadaşın yok!</strong><br><span data-tr="msg.bos3">Arkadaş eklemek için sol menüdeki Arkadaş Ekle butonuna tıkla ve Gmail adresini yaz.</span></div>
-          </div>
-          <div id="chatActive" style="display:none;flex:1;display:none;flex-direction:column">
+          <div class="chat-placeholder" id="chatPlaceholder">💬<br><br><strong>Arkadaşın yok!</strong><br>Arkadaş eklemek için sol menüdeki Arkadaşlar butonuna tıkla.</div>
+          <div id="chatActive" style="display:none;flex-direction:column;flex:1">
             <div class="chat-header">
               <div class="avatar" id="chatAvatar">Z</div>
               <span id="chatName">İsim</span>
             </div>
             <div class="chat-messages" id="chatMessages"></div>
             <div class="chat-input-area">
-              <div class="cbtn attach" onclick="attachFileChat()" title="Dosya ekle">📎</div>
-              <input type="text" id="chatInput" placeholder="Mesaj yaz..." onkeydown="if(event.key==='Enter')sendMessage()" data-tr="msg.yaz">
+              <div class="cbtn attach" onclick="attachFileChat()">📎</div>
+              <input type="text" id="chatInput" placeholder="Mesaj yaz..." onkeydown="if(event.key==='Enter')sendMessage()">
               <div class="cbtn" onclick="sendMessage()">➤</div>
             </div>
           </div>
@@ -567,13 +351,14 @@ a{text-decoration:none;color:inherit}
     <!-- FRIENDS -->
     <div class="page" id="page-friends">
       <div class="friends-content">
-        <h3 data-tr="friends.arkadaslarim">Arkadaşlarım</h3>
+        <h3>Arkadaşlarım</h3>
         <div class="add-friend-card">
-          <div class="label" data-tr="friends.ekle_baslik">Yeni Arkadaş Ekle</div>
+          <div class="label">Yeni Arkadaş Ekle</div>
           <div class="row">
-            <input type="email" id="addFriendInput" placeholder="Gmail adresi yaz..." data-tr="friends.ekle_placeholder">
-            <button class="add-btn" onclick="addFriend()" data-tr="friends.ekle_btn">Ekle</button>
+            <input type="email" id="addFriendInput" placeholder="Gmail adresi yaz...">
+            <button class="add-btn" id="addFriendBtn" onclick="addFriend()">Ekle</button>
           </div>
+          <div id="addFriendError" style="font-size:12px;color:var(--danger);margin-top:6px;display:none"></div>
         </div>
         <div id="friendsList"></div>
       </div>
@@ -585,15 +370,13 @@ a{text-decoration:none;color:inherit}
         <div class="drop-card">
           <div class="drop-zone" id="dropZone" onclick="document.getElementById('dropFileInput').click()">
             <div class="icon">📁</div>
-            <div class="text" data-tr="drop.birak">Dosyayı buraya sürükle veya tıkla</div>
-            <div class="sub" data-tr="drop.boyut">Video, fotoğraf, zip — her şey</div>
+            <div class="text">Dosyayı buraya sürükle veya tıkla</div>
+            <div class="sub">Video, fotoğraf, zip — her şey</div>
             <input type="file" id="dropFileInput" style="display:none" onchange="handleDropFile(this)">
           </div>
           <div id="dropFileInfo" style="display:none"></div>
-          <select class="drop-select-friend" id="dropFriendSelect">
-            <option value="" data-tr="drop.sec">— Arkadaş seç —</option>
-          </select>
-          <button class="drop-send-btn" id="dropSendBtn" onclick="sendDrop()" disabled data-tr="drop.gonder">Gönder</button>
+          <select class="drop-select-friend" id="dropFriendSelect"><option value="">— Arkadaş seç —</option></select>
+          <button class="drop-send-btn" id="dropSendBtn" onclick="sendDrop()" disabled>Gönder</button>
           <div class="drop-history" id="dropHistory"></div>
         </div>
       </div>
@@ -602,38 +385,38 @@ a{text-decoration:none;color:inherit}
     <!-- SETTINGS -->
     <div class="page" id="page-settings">
       <div class="settings-content">
-        <h3 data-tr="ayarlar.baslik">Ayarlar</h3>
+        <h3>Ayarlar</h3>
         <div class="settings-card">
-          <div class="label" data-tr="ayarlar.profil">Profil</div>
-          <div class="desc" data-tr="ayarlar.profil_desc">Profil fotoğrafın ve ismin</div>
+          <div class="label">Profil</div>
+          <div class="desc">Profil fotoğrafın ve ismin</div>
           <div class="avatar-preview" id="settingsAvatarPreview">Z</div>
           <input type="file" id="photoInput" accept="image/*" onchange="changePhoto(this)">
-          <label class="photo-upload" for="photoInput" data-tr="ayarlar.foto_degistir">📷 Fotoğraf Değiştir</label>
+          <label class="photo-upload" for="photoInput">📷 Fotoğraf Değiştir</label>
         </div>
         <div class="settings-card">
-          <div class="label" data-tr="ayarlar.isim">İsim</div>
+          <div class="label">İsim</div>
           <div class="row">
             <input type="text" id="nameInput" placeholder="İsmin">
-            <button class="save-btn" onclick="saveName()" data-tr="ayarlar.kaydet">Kaydet</button>
+            <button class="save-btn" onclick="saveName()">Kaydet</button>
           </div>
         </div>
         <div class="settings-card">
-          <div class="label" data-tr="ayarlar.dil">Dil / Language</div>
-          <div class="desc" data-tr="ayarlar.dil_desc">Uygulama dilini değiştir</div>
+          <div class="label">Dil / Language</div>
+          <div class="desc">Uygulama dilini değiştir</div>
           <div class="lang-btns">
             <button class="lang-btn active" data-lang="tr" onclick="setLang('tr')">Türkçe</button>
             <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
           </div>
         </div>
         <div class="settings-card">
-          <div class="label" data-tr="ayarlar.tema">Tema</div>
-          <div class="desc" data-tr="ayarlar.tema_desc">Aydınlık / Karanlık mod</div>
-          <button class="save-btn" onclick="toggleTheme()" id="themeToggleBtn" data-tr="ayarlar.tema_degistir">🌙 Karanlık Mod</button>
+          <div class="label">Tema</div>
+          <div class="desc">Aydınlık / Karanlık mod</div>
+          <button class="save-btn" onclick="toggleTheme()" id="themeToggleBtn">🌙 Karanlık Mod</button>
         </div>
         <div class="settings-card">
-          <div class="label" data-tr="ayarlar.cikis">Çıkış Yap</div>
-          <div class="desc" data-tr="ayarlar.cikis_desc">Hesabından çık ve giriş ekranına dön</div>
-          <button class="save-btn" style="background:var(--danger)" onclick="logout()" data-tr="ayarlar.cikis_btn">🚪 Çıkış Yap</button>
+          <div class="label">Çıkış Yap</div>
+          <div class="desc">Hesabından çık ve giriş ekranına dön</div>
+          <button class="save-btn" style="background:var(--danger)" onclick="logout()">🚪 Çıkış Yap</button>
         </div>
       </div>
     </div>
@@ -641,149 +424,262 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <!-- CONFIRM MODAL -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal">
+<div class="modal-overlay" id="modalOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;backdrop-filter:blur(4px)">
+  <div class="modal" style="background:var(--bg2);border-radius:16px;padding:24px;width:380px;max-width:90vw;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,0.3)">
     <h3 id="modalTitle">Uyarı</h3>
-    <p id="modalText">Emin misin?</p>
-    <div class="modal-btns">
-      <button class="modal-btn secondary" onclick="closeModal()" data-tr="modal.iptal">İptal</button>
-      <button class="modal-btn primary" id="modalConfirmBtn" onclick="closeModal()">Tamam</button>
+    <p id="modalText" style="font-size:13px;color:var(--text2);line-height:1.6;margin:12px 0 18px">Emin misin?</p>
+    <div class="modal-btns" style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="modal-btn secondary" onclick="closeModal()" style="padding:8px 18px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;background:var(--input-bg);color:var(--text);transition:all .2s">İptal</button>
+      <button class="modal-btn primary" id="modalConfirmBtn" onclick="closeModal()" style="padding:8px 18px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;background:var(--primary);color:#fff;transition:all .2s">Tamam</button>
     </div>
   </div>
 </div>
 
 <script>
-// ======================== TRANSLATIONS ========================
-const STR = {
-  tr: {
-    'zero.giris': 'Giriş yap ve bağlan',
-    'zero.oneri': 'önerilen',
-    'zero.veya': 'veya',
-    'zero.gmail_placeholder': 'Gmail adresin',
-    'zero.isim_placeholder': 'İsmin',
-    'zero.giris_btn': 'Giriş Yap',
-    'menu.mesajlar': 'Mesajlar',
-    'menu.arkadaslar': 'Arkadaşlar',
-    'menu.drop': 'Drop',
-    'menu.ayarlar': 'Ayarlar',
-    'menu.karanlik': 'Karanlık Mod',
-    'msg.arkadaslar': 'Arkadaşlar',
-    'msg.ara': 'Ara...',
-    'msg.bos': '💬<br><br><strong>Arkadaşın yok!</strong><br>Arkadaş eklemek için<br>sol menüdeki Arkadaşlar butonuna tıkla ve Gmail adresini yaz.',
-    'msg.bos2': 'Arkadaşın yok!',
-    'msg.bos3': 'Arkadaş eklemek için<br>sol menüdeki Arkadaşlar butonuna tıkla ve Gmail adresini yaz.',
-    'msg.yaz': 'Mesaj yaz...',
-    'msg.dosya_geldi': 'bir dosya gönderdi',
-    'msg.dosya_gonderdi': 'bir dosya gönderdin',
-    'friends.arkadaslarim': 'Arkadaşlarım',
-    'friends.ekle_baslik': 'Yeni Arkadaş Ekle',
-    'friends.ekle_placeholder': 'Gmail adresi yaz...',
-    'friends.ekle_btn': 'Ekle',
-    'friends.no_friends': 'Henüz arkadaşın yok. Yukarıdan Gmail ile arkadaş ekle.',
-    'friends.no_friends_title': 'Arkadaşın yok!',
-    'drop.birak': 'Dosyayı buraya sürükle veya tıkla',
-    'drop.boyut': 'Video, fotoğraf, zip — her şey',
-    'drop.sec': '— Arkadaş seç —',
-    'drop.gonder': 'Gönder',
-    'drop.gonder_btn': 'Gönder',
-    'drop.bos': 'Henüz gönderilen dosya yok.',
-    'drop.basari': 'Dosya başarıyla gönderildi!',
-    'drop.sec_uysari': 'Önce bir arkadaş seç!',
-    'drop.dosya_sec': 'Önce bir dosya seç!',
-    'ayarlar.baslik': 'Ayarlar',
-    'ayarlar.profil': 'Profil',
-    'ayarlar.profil_desc': 'Profil fotoğrafın ve ismin',
-    'ayarlar.foto_degistir': '📷 Fotoğraf Değiştir',
-    'ayarlar.isim': 'İsim',
-    'ayarlar.kaydet': 'Kaydet',
-    'ayarlar.dil': 'Dil / Language',
-    'ayarlar.dil_desc': 'Uygulama dilini değiştir',
-    'ayarlar.tema': 'Tema',
-    'ayarlar.tema_desc': 'Aydınlık / Karanlık mod',
-    'ayarlar.tema_degistir': '🌙 Karanlık Mod',
-    'ayarlar.cikis': 'Çıkış Yap',
-    'ayarlar.cikis_desc': 'Hesabından çık ve giriş ekranına dön',
-    'ayarlar.cikis_btn': '🚪 Çıkış Yap',
-    'modal.iptal': 'İptal',
-    'modal.evet': 'Evet',
-    'toast.kaydedildi': 'Kaydedildi ✅',
-    'toast.arkadas_eklendi': 'Arkadaş eklendi ✅',
-    'toast.arkadas_zaten': 'Bu kişi zaten arkadaşın!',
-    'toast.arkadas_kendin': 'Kendini ekleyemezsin!',
-    'toast.arkadas_silindi': 'Arkadaş silindi',
-    'toast.mesaj_gonderildi': 'Mesaj gönderildi',
-    'toast.foto_degisti': 'Fotoğraf değiştirildi ✅',
-    'toast.isim_kaydedildi': 'İsim kaydedildi ✅',
-  },
-  en: {
-    'zero.giris': 'Sign in and connect',
-    'zero.oneri': 'recommended',
-    'zero.veya': 'or',
-    'zero.gmail_placeholder': 'Your Gmail',
-    'zero.isim_placeholder': 'Your name',
-    'zero.giris_btn': 'Sign In',
-    'menu.mesajlar': 'Messages',
-    'menu.arkadaslar': 'Friends',
-    'menu.drop': 'Drop',
-    'menu.ayarlar': 'Settings',
-    'menu.karanlik': 'Dark Mode',
-    'msg.arkadaslar': 'Friends',
-    'msg.ara': 'Search...',
-    'msg.bos': '💬<br><br><strong>You have no friends!</strong><br>Go to Friends in the sidebar and add by Gmail.',
-    'msg.bos2': 'You have no friends!',
-    'msg.bos3': 'Go to Friends in the sidebar and add by Gmail.',
-    'msg.yaz': 'Write a message...',
-    'msg.dosya_geldi': 'sent you a file',
-    'msg.dosya_gonderdi': 'you sent a file',
-    'friends.arkadaslarim': 'My Friends',
-    'friends.ekle_baslik': 'Add New Friend',
-    'friends.ekle_placeholder': 'Enter Gmail address...',
-    'friends.ekle_btn': 'Add',
-    'friends.no_friends': 'No friends yet. Add friends by Gmail above.',
-    'friends.no_friends_title': 'No friends!',
-    'drop.birak': 'Drag & drop a file or click',
-    'drop.boyut': 'Video, photo, zip — anything',
-    'drop.sec': '— Select a friend —',
-    'drop.gonder': 'Send',
-    'drop.gonder_btn': 'Send',
-    'drop.bos': 'No files sent yet.',
-    'drop.basari': 'File sent successfully!',
-    'drop.sec_uysari': 'Select a friend first!',
-    'drop.dosya_sec': 'Select a file first!',
-    'ayarlar.baslik': 'Settings',
-    'ayarlar.profil': 'Profile',
-    'ayarlar.profil_desc': 'Your profile picture and name',
-    'ayarlar.foto_degistir': '📷 Change Photo',
-    'ayarlar.isim': 'Name',
-    'ayarlar.kaydet': 'Save',
-    'ayarlar.dil': 'Dil / Language',
-    'ayarlar.dil_desc': 'Change application language',
-    'ayarlar.tema': 'Theme',
-    'ayarlar.tema_desc': 'Light / Dark mode',
-    'ayarlar.tema_degistir': '🌙 Dark Mode',
-    'ayarlar.cikis': 'Log Out',
-    'ayarlar.cikis_desc': 'Sign out and return to login screen',
-    'ayarlar.cikis_btn': '🚪 Log Out',
-    'modal.iptal': 'Cancel',
-    'modal.evet': 'Yes',
-    'toast.kaydedildi': 'Saved ✅',
-    'toast.arkadas_eklendi': 'Friend added ✅',
-    'toast.arkadas_zaten': 'This person is already your friend!',
-    'toast.arkadas_kendin': "You can't add yourself!",
-    'toast.arkadas_silindi': 'Friend removed',
-    'toast.mesaj_gonderildi': 'Message sent',
-    'toast.foto_degisti': 'Photo changed ✅',
-    'toast.isim_kaydedildi': 'Name saved ✅',
-  }
-};
+const GROQ_API_KEY = atob('Z3NrX3VRVUlqT3N5emNKdlNjYzFSaDRCV0dkYjNGWTZFTkJoTElWdnF6VmNxUEp6c0RPdHhhcA==');
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const MIRA_EMAIL = 'mira@zero.app';
+const MIRA_NAME = 'Mira';
 
-let currentLang = localStorage.getItem('zero_lang') || 'tr';
+let currentLang = 'tr';
 let currentTheme = localStorage.getItem('zero_theme') || 'light';
 let currentUser = null;
 let selectedChat = null;
 let dropFile = null;
+let lsPendingEmail = null;
 
-// ======================== STATE ========================
+function g(key) {
+  const M = {
+    tr: {
+      no_friends: 'Henüz arkadaşın yok. Yukarıdan Gmail ile arkadaş ekle.',
+      no_friends_chat: 'Arkadaşın yok!<br>Arkadaş eklemek için Arkadaşlar sayfasına git.',
+      select_friend: '— Arkadaş seç —',
+      drop_empty: 'Henüz gönderilen dosya yok.',
+      drop_success: 'Başarılı şekilde gönderildi',
+      drop_fail: 'BAŞARISIZ!',
+      add_friend_invalid: 'Bu uygulamada böyle biri bulunamadı',
+      add_friend_self: 'Kendini ekleyemezsin!',
+      add_friend_exists: 'Bu kişi zaten arkadaşın!',
+      add_friend_ok: 'Arkadaş eklendi ✅',
+      saved: 'Kaydedildi ✅',
+      photo_ok: 'Fotoğraf değiştirildi ✅',
+      msg_sent: 'Mesaj gönderildi',
+      file_sent: 'Dosya gönderildi',
+      friend_removed: 'Arkadaş silindi',
+      loading: 'Giriş yapılıyor...',
+      ls_title: 'Oturum aç',
+      ls_sub: 'Google hesabına devam et',
+      ls_other: 'Başka hesap kullan',
+      ls_pw_forgot: 'Şifreni mi unuttun?',
+      ls_next: 'İleri',
+      ls_new_title: 'Hesap seç',
+      ls_new_sub: 'Yeni bir Gmail adresi gir',
+      ls_new_placeholder: 'Gmail adresin',
+      mira_welcome: 'Merhaba! Ben Mira. Sana nasıl yardımcı olabilirim?',
+      ls_privacy: 'Gizlilik', ls_terms: 'Şartlar',
+      settings: 'Ayarlar', logout: 'Çıkış Yap',
+    },
+    en: {
+      no_friends: 'No friends yet. Add friends by Gmail above.',
+      no_friends_chat: 'You have no friends!<br>Go to Friends page to add.',
+      select_friend: '— Select a friend —',
+      drop_empty: 'No files sent yet.',
+      drop_success: 'Successfully sent',
+      drop_fail: 'FAILED!',
+      add_friend_invalid: 'User not found in this application',
+      add_friend_self: "You can't add yourself!",
+      add_friend_exists: 'This person is already your friend!',
+      add_friend_ok: 'Friend added ✅',
+      saved: 'Saved ✅',
+      photo_ok: 'Photo changed ✅',
+      msg_sent: 'Message sent',
+      file_sent: 'File sent',
+      friend_removed: 'Friend removed',
+      loading: 'Signing in...',
+      ls_title: 'Sign in',
+      ls_sub: 'Continue with Google account',
+      ls_other: 'Use another account',
+      ls_pw_forgot: 'Forgot password?',
+      ls_next: 'Next',
+      ls_new_title: 'Choose account',
+      ls_new_sub: 'Enter a new Gmail address',
+      ls_new_placeholder: 'Your Gmail',
+      mira_welcome: 'Hello! I am Mira. How can I help you?',
+    }
+  };
+  return (M[currentLang]||M.tr)[key]||key;
+}
+
+// === TOAST ===
+function toast(msg, type, duration) {
+  duration = duration || 2000;
+  const t = document.getElementById('toast');
+  document.getElementById('toastText').textContent = msg;
+  t.className = 'toast ' + (type==='error'?'error':'') + ' show';
+  const bar = document.getElementById('toastBar');
+  bar.style.transition = 'none';
+  bar.style.width = '100%';
+  clearTimeout(t._hide);
+  setTimeout(() => { bar.style.transition = 'width '+duration+'ms linear'; bar.style.width = '0%'; }, 10);
+  t._hide = setTimeout(() => { t.classList.remove('show'); }, duration);
+}
+
+// === MODAL ===
+function showModal(title, text, cb) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalText').textContent = text;
+  document.getElementById('modalConfirmBtn').onclick = () => { closeModal(); if(cb) cb(); };
+  document.getElementById('modalOverlay').style.display = 'flex';
+}
+function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+
+// === LANG ===
+function setLang(l) { currentLang = l; localStorage.setItem('zero_lang', l); applyUIStrings(); }
+
+function applyUIStrings() {
+  document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = g(el.getAttribute('data-i18n')));
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+  document.documentElement.lang = currentLang;
+  document.title = 'zero';
+}
+
+// === THEME ===
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'dark' : 'light');
+  document.getElementById('themeIcon').textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  document.getElementById('themeLabel').textContent = currentTheme === 'dark' ? 'Aydınlık Mod' : 'Karanlık Mod';
+  document.getElementById('themeToggleBtn').textContent = currentTheme === 'dark' ? '☀️ Aydınlık Mod' : '🌙 Karanlık Mod';
+}
+function toggleTheme() { currentTheme = currentTheme==='dark'?'light':'dark'; localStorage.setItem('zero_theme', currentTheme); applyTheme(); }
+
+// === LOGIN SYSTEM ===
+function getAccounts() { return JSON.parse(localStorage.getItem('zero_accounts') || '[]'); }
+function setAccounts(a) { localStorage.setItem('zero_accounts', JSON.stringify(a)); }
+
+function lsRenderPicker() {
+  const accounts = getAccounts();
+  const container = document.getElementById('lsSavedAccounts');
+  container.innerHTML = '';
+  accounts.forEach((acc, i) => {
+    const div = document.createElement('button');
+    div.className = 'ls-account';
+    const initial = acc.name.charAt(0).toUpperCase();
+    div.innerHTML = '<div class="la-av">'+initial+'</div><div class="la-info"><div class="la-name">'+escHtml(acc.name)+'</div><div class="la-email">'+escHtml(acc.email)+'</div></div>';
+    div.onclick = () => lsSelectAccount(acc);
+    container.appendChild(div);
+  });
+  document.getElementById('ls1Title').textContent = g('ls_title');
+  document.getElementById('ls1Sub').textContent = g('ls_sub');
+  document.querySelectorAll('#ls-step1 .ls-other span')[1].textContent = g('ls_other');
+  document.querySelector('#ls-step1 .ls-footer a:first-child').textContent = g('ls_privacy');
+  document.querySelector('#ls-step1 .ls-footer a:last-child').textContent = g('ls_terms');
+}
+
+function lsSelectAccount(acc) {
+  lsPendingEmail = acc.email;
+  document.getElementById('lsEmailBar').innerHTML = '<span class="eb-icon">👤</span> ' + escHtml(acc.email) + ' <span style="margin-left:4px">▾</span>';
+  document.getElementById('lsPassword').value = '';
+  document.getElementById('lsPassword').focus();
+  document.querySelectorAll('.login-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('ls-step2').classList.add('active');
+}
+
+function lsBackToPicker() {
+  document.querySelectorAll('.login-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('ls-step1').classList.add('active');
+  lsRenderPicker();
+}
+
+function lsNewAccount() {
+  document.getElementById('lsNewEmail').value = '';
+  document.getElementById('lsNewError').style.display = 'none';
+  document.querySelectorAll('.login-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('ls-step4').classList.add('active');
+  document.getElementById('lsNewEmail').focus();
+}
+
+function lsCheckNewEmail() {
+  const email = document.getElementById('lsNewEmail').value.trim().toLowerCase();
+  const err = document.getElementById('lsNewError');
+  if (!email || !email.includes('@')) {
+    err.textContent = 'Geçerli bir e-posta adresi gir';
+    err.style.display = 'block'; return;
+  }
+  if (!email.endsWith('@gmail.com') && !email.endsWith('@googlemail.com')) {
+    err.textContent = g('add_friend_invalid');
+    err.style.display = 'block'; return;
+  }
+  const local = email.split('@')[0];
+  if (!/^[a-zA-Z0-9.]+$/.test(local)) {
+    err.textContent = g('add_friend_invalid');
+    err.style.display = 'block'; return;
+  }
+  err.style.display = 'none';
+  const name = local.replace(/[._]/g, ' ');
+  const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+  lsPendingEmail = email;
+  document.getElementById('lsEmailBar').innerHTML = '<span class="eb-icon">👤</span> ' + escHtml(email) + ' <span style="margin-left:4px">▾</span>';
+  document.getElementById('lsPassword').value = '';
+  document.querySelectorAll('.login-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('ls-step2').classList.add('active');
+  document.getElementById('lsPassword').focus();
+}
+
+function lsDoLogin() {
+  const pw = document.getElementById('lsPassword').value.trim();
+  if (!pw) { document.getElementById('lsPassword').focus(); return; }
+  const email = lsPendingEmail;
+  const local = email.split('@')[0];
+  const name = local.replace(/[._]/g, ' ');
+  const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+  document.querySelectorAll('.login-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('ls-step3').classList.add('active');
+  const accounts = getAccounts();
+  if (!accounts.find(a => a.email === email)) {
+    accounts.push({ name: displayName, email: email });
+    setAccounts(accounts);
+  }
+  setTimeout(() => doLogin(displayName, email), 800);
+}
+
+function doLogin(name, email) {
+  currentUser = { name, email, photo: null };
+  setUser(currentUser);
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('appScreen').classList.add('active');
+  updateProfileUI();
+  ensureMiraFriend();
+  renderFriends();
+  renderFriendList();
+  renderChat();
+  renderDropFriends();
+  renderDropHistory();
+  applyTheme();
+  goPage('messages');
+}
+
+function logout() {
+  showModal('Çıkış Yap', 'Hesabından çıkmak istediğine emin misin?', () => {
+    currentUser = null;
+    localStorage.removeItem('zero_user');
+    document.getElementById('appScreen').classList.remove('active');
+    document.getElementById('loginScreen').classList.remove('hidden');
+    location.reload();
+  });
+}
+
+function ensureMiraFriend() {
+  let friends = getFriends();
+  if (!friends.find(f => f.email === MIRA_EMAIL)) {
+    friends.unshift({ name: MIRA_NAME, email: MIRA_EMAIL, photo: null, isMira: true });
+    setFriends(friends);
+  }
+}
+
+// === STATE ===
 function getFriends() { return JSON.parse(localStorage.getItem('zero_friends') || '[]'); }
 function setFriends(f) { localStorage.setItem('zero_friends', JSON.stringify(f)); }
 function getMessages() { return JSON.parse(localStorage.getItem('zero_msgs') || '{}'); }
@@ -793,308 +689,180 @@ function setDropHistory(d) { localStorage.setItem('zero_drops', JSON.stringify(d
 function getUser() { return JSON.parse(localStorage.getItem('zero_user') || 'null'); }
 function setUser(u) { localStorage.setItem('zero_user', JSON.stringify(u)); }
 
-// ======================== TOAST ========================
-function toast(msg, type='success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast ' + type + ' show';
-  clearTimeout(t._hide);
-  t._hide = setTimeout(() => t.classList.remove('show'), 2500);
-}
-
-// ======================== MODAL ========================
-function showModal(title, text, cb) {
-  document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalText').textContent = text;
-  const btn = document.getElementById('modalConfirmBtn');
-  btn.onclick = () => { closeModal(); if(cb) cb(); };
-  document.getElementById('modalOverlay').classList.add('active');
-}
-function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
-
-// ======================== LANG ========================
-function t(key) {
-  const lang = STR[currentLang] || STR.tr;
-  return lang[key] || STR.tr[key] || key;
-}
-
-function applyLang() {
-  document.querySelectorAll('[data-tr]').forEach(el => {
-    const key = el.getAttribute('data-tr');
-    el.innerHTML = t(key);
-  });
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.lang === currentLang);
-  });
-  document.documentElement.lang = currentLang === 'tr' ? 'tr' : 'en';
-  document.title = currentLang === 'tr' ? 'zero' : 'zero';
-}
-
-function setLang(l) {
-  currentLang = l;
-  localStorage.setItem('zero_lang', l);
-  applyLang();
-  if (currentUser) {
-    renderFriends();
-    renderFriendList();
-    renderChat();
-    renderDropHistory();
-  }
-}
-
-// ======================== THEME ========================
-function applyTheme() {
-  document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'dark' : 'light');
-  document.getElementById('themeIcon').textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-  document.getElementById('themeLabel').textContent = currentTheme === 'dark' ? (currentLang === 'tr' ? 'Aydınlık Mod' : 'Light Mode') : (currentLang === 'tr' ? 'Karanlık Mod' : 'Dark Mode');
-  const btn = document.getElementById('themeToggleBtn');
-  if (btn) btn.textContent = currentTheme === 'dark' ? '☀️ ' + (currentLang === 'tr' ? 'Aydınlık Mod' : 'Light Mode') : '🌙 ' + (currentLang === 'tr' ? 'Karanlık Mod' : 'Dark Mode');
-}
-
-function toggleTheme() {
-  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  localStorage.setItem('zero_theme', currentTheme);
-  applyTheme();
-}
-
-// ======================== LOGIN ========================
-function loginWithGoogle() {
-  const email = document.getElementById('loginEmail').value.trim() || 'kullanici@gmail.com';
-  const name = document.getElementById('loginName').value.trim() || 'Kullanıcı';
-  doLogin(name, email);
-}
-
-function loginWithEmail() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const name = document.getElementById('loginName').value.trim();
-  if (!email) { toast('Gmail adresinizi girin', 'error'); return; }
-  if (!name) { toast('İsminizi girin', 'error'); return; }
-  doLogin(name, email);
-}
-
-function doLogin(name, email) {
-  currentUser = { name, email, photo: null };
-  setUser(currentUser);
-  document.getElementById('loginScreen').classList.add('hidden');
-  document.getElementById('appScreen').classList.add('active');
-  updateProfileUI();
-  renderFriends();
-  renderFriendList();
-  renderChat();
-  renderDropHistory();
-  applyLang();
-  applyTheme();
-  goPage('messages');
-}
-
-function logout() {
-  showModal(
-    currentLang === 'tr' ? 'Çıkış Yap' : 'Log Out',
-    currentLang === 'tr' ? 'Hesabından çıkmak istediğine emin misin?' : 'Are you sure you want to log out?',
-    () => {
-      currentUser = null;
-      localStorage.removeItem('zero_user');
-      document.getElementById('appScreen').classList.remove('active');
-      document.getElementById('loginScreen').classList.remove('hidden');
-      location.reload();
-    }
-  );
-}
-
-// ======================== PROFILE UI ========================
+// === PROFILE UI ===
 function updateProfileUI() {
   if (!currentUser) return;
   const initial = currentUser.name.charAt(0).toUpperCase();
-  const updateEl = (id) => {
+  const up = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
     if (currentUser.photo) {
-      el.innerHTML = '';
-      el.style.backgroundImage = 'url(' + currentUser.photo + ')';
-      el.style.backgroundSize = 'cover';
-      el.style.backgroundPosition = 'center';
+      el.innerHTML = ''; el.style.backgroundImage = 'url('+currentUser.photo+')';
+      el.style.backgroundSize = 'cover'; el.style.backgroundPosition = 'center';
     } else {
-      el.style.backgroundImage = '';
-      el.textContent = initial;
+      el.style.backgroundImage = ''; el.textContent = initial;
       el.style.background = 'linear-gradient(135deg,var(--primary),#6366f1)';
     }
   };
-  updateEl('sidebarAvatar');
-  updateEl('settingsAvatarPreview');
+  up('sidebarAvatar'); up('settingsAvatarPreview');
   document.getElementById('sidebarName').textContent = currentUser.name;
   document.getElementById('sidebarEmail').textContent = currentUser.email;
   document.getElementById('nameInput').value = currentUser.name;
 }
-
-// ======================== PHOTO ========================
 function changePhoto(input) {
-  const file = input.files[0];
-  if (!file) return;
+  const file = input.files[0]; if (!file) return;
   const reader = new FileReader();
-  reader.onload = (e) => {
-    currentUser.photo = e.target.result;
-    setUser(currentUser);
-    updateProfileUI();
-    toast(t('toast.foto_degisti'));
-  };
+  reader.onload = (e) => { currentUser.photo = e.target.result; setUser(currentUser); updateProfileUI(); toast(g('photo_ok')); };
   reader.readAsDataURL(file);
 }
-
 function saveName() {
   const name = document.getElementById('nameInput').value.trim();
-  if (!name) return;
-  currentUser.name = name;
-  setUser(currentUser);
-  updateProfileUI();
-  toast(t('toast.isim_kaydedildi'));
+  if (!name) return; currentUser.name = name; setUser(currentUser); updateProfileUI(); toast(g('saved'));
 }
 
-// ======================== NAVIGATION ========================
+// === NAVIGATION ===
 function goPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  document.querySelector('.menu-item[data-page="' + page + '"]').classList.add('active');
-  if (page === 'friends') renderFriends();
-  if (page === 'drop') { renderDropFriends(); renderDropHistory(); }
-  if (page === 'messages') renderFriendList();
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelector('.menu-item[data-page="'+page+'"]').classList.add('active');
+  if (page==='friends') renderFriends();
+  if (page==='drop') { renderDropFriends(); renderDropHistory(); }
+  if (page==='messages') renderFriendList();
 }
 
-// ======================== FRIENDS ========================
+// === FRIEND ADD ===
 function addFriend() {
   const input = document.getElementById('addFriendInput');
+  const err = document.getElementById('addFriendError');
   const email = input.value.trim().toLowerCase();
-  if (!email || !email.includes('@')) { toast('Geçerli bir Gmail adresi gir', 'error'); return; }
-  if (email === currentUser.email.toLowerCase()) { toast(t('toast.arkadas_kendin'), 'error'); return; }
+  if (!email || !email.includes('@')) {
+    err.textContent = 'Geçerli bir e-posta adresi gir'; err.style.display = 'block'; return;
+  }
+  if (!email.endsWith('@gmail.com') && !email.endsWith('@googlemail.com')) {
+    err.textContent = g('add_friend_invalid'); err.style.display = 'block'; return;
+  }
+  const local = email.split('@')[0];
+  if (!/^[a-zA-Z0-9.]+$/.test(local)) {
+    err.textContent = g('add_friend_invalid'); err.style.display = 'block'; return;
+  }
+  err.style.display = 'none';
+  if (email === currentUser.email.toLowerCase()) { toast(g('add_friend_self'), 'error'); return; }
   let friends = getFriends();
-  if (friends.find(f => f.email.toLowerCase() === email)) { toast(t('toast.arkadas_zaten'), 'error'); return; }
-  const name = email.split('@')[0].replace(/[._]/g, ' ');
-  const displayName = name.charAt(0).toUpperCase() + name.slice(1);
-  friends.push({ name: displayName, email, photo: null });
-  setFriends(friends);
-  input.value = '';
-  renderFriends();
-  renderFriendList();
-  renderDropFriends();
-  toast(t('toast.arkadas_eklendi'));
+  if (friends.find(f => f.email === email)) { toast(g('add_friend_exists'), 'error'); return; }
+  document.getElementById('addFriendBtn').disabled = true;
+  document.getElementById('addFriendBtn').textContent = 'Kontrol...';
+  // Simulate checking
+  setTimeout(() => {
+    const name = local.replace(/[._]/g, ' ');
+    const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+    friends.push({ name: displayName, email, photo: null });
+    setFriends(friends);
+    input.value = '';
+    document.getElementById('addFriendBtn').disabled = false;
+    document.getElementById('addFriendBtn').textContent = 'Ekle';
+    renderFriends(); renderFriendList(); renderDropFriends();
+    toast(g('add_friend_ok'));
+  }, 600);
 }
 
 function removeFriend(email) {
-  showModal(
-    currentLang === 'tr' ? 'Arkadaş Sil' : 'Remove Friend',
-    currentLang === 'tr' ? 'Bu arkadaşı silmek istediğine emin misin?' : 'Are you sure you want to remove this friend?',
-    () => {
-      let friends = getFriends().filter(f => f.email !== email);
-      setFriends(friends);
-      renderFriends();
-      renderFriendList();
-      renderDropFriends();
-      if (selectedChat && selectedChat === email) { selectedChat = null; renderChat(); }
-      toast(t('toast.arkadas_silindi'));
-    }
-  );
+  if (email === MIRA_EMAIL) { toast('Mira silinemez!', 'error'); return; }
+  showModal('Arkadaş Sil', 'Bu arkadaşı silmek istediğine emin misin?', () => {
+    let friends = getFriends().filter(f => f.email !== email);
+    setFriends(friends);
+    renderFriends(); renderFriendList(); renderDropFriends();
+    if (selectedChat === email) { selectedChat = null; renderChat(); }
+    toast(g('friend_removed'));
+  });
 }
 
 function renderFriends() {
   const container = document.getElementById('friendsList');
   const friends = getFriends();
   if (friends.length === 0) {
-    container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2);font-size:13px">' + t('friends.no_friends') + '</div>';
+    container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2);font-size:13px">'+g('no_friends')+'</div>';
     return;
   }
-  container.innerHTML = '<div class="friends-grid">' + friends.map(f => {
+  container.innerHTML = '<div class="friends-grid">'+friends.map(f => {
     const initial = f.name.charAt(0).toUpperCase();
-    const avatarStyle = f.photo
-      ? 'background-image:url(' + f.photo + ');background-size:cover;background-position:center;'
-      : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
-    return '<div class="friend-card">' +
-      '<div class="avatar" style="' + avatarStyle + '">' + (f.photo ? '' : initial) + '</div>' +
-      '<div class="fname">' + escapeHtml(f.name) + '</div>' +
-      '<div class="femail">' + escapeHtml(f.email) + '</div>' +
-      '<div class="factions">' +
-      '<button class="fbtn msg" onclick="goChat(\'' + f.email + '\')">💬</button>' +
-      '<button class="fbtn del" onclick="removeFriend(\'' + f.email + '\')">✕</button>' +
-      '</div></div>';
-  }).join('') + '</div>';
+    const avStyle = f.photo ? 'background-image:url('+f.photo+');background-size:cover;background-position:center;' : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
+    const delDisabled = f.email === MIRA_EMAIL ? 'disabled' : '';
+    return '<div class="friend-card"><div class="avatar" style="'+avStyle+'">'+(f.photo?'':initial)+'</div>'+
+      '<div class="fname">'+escHtml(f.name)+'</div><div class="femail">'+escHtml(f.email)+'</div>'+
+      '<div class="factions"><button class="fbtn msg" onclick="goChat(\''+f.email+'\')">💬</button>'+
+      '<button class="fbtn del" '+delDisabled+' onclick="removeFriend(\''+f.email+'\')">✕</button></div></div>';
+  }).join('')+'</div>';
 }
 
 function renderFriendList() {
   const container = document.getElementById('friendItems');
   const friends = getFriends();
   if (friends.length === 0) {
-    container.innerHTML = '<div class="no-friends"><strong>' + t('friends.no_friends_title') + '</strong><br>' + t('friends.no_friends') + '</div>';
+    container.innerHTML = '<div class="no-friends"><strong>'+g('no_friends').split('<')[0]+'</strong><br>'+g('no_friends')+'</div>';
     return;
   }
   container.innerHTML = friends.map(f => {
     const active = selectedChat === f.email ? ' active' : '';
     const initial = f.name.charAt(0).toUpperCase();
-    const avatarStyle = f.photo
-      ? 'background-image:url(' + f.photo + ');background-size:cover;background-position:center;'
-      : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
-    return '<div class="friend-item' + active + '" onclick="goChat(\'' + f.email + '\')">' +
-      '<div class="avatar" style="' + avatarStyle + '">' + (f.photo ? '' : initial) + '</div>' +
-      '<div class="f-info"><div class="f-name">' + escapeHtml(f.name) + '</div><div class="f-email">' + escapeHtml(f.email) + '</div></div>' +
+    const avStyle = f.photo ? 'background-image:url('+f.photo+');background-size:cover;background-position:center;' : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
+    const isMira = f.email === MIRA_EMAIL;
+    return '<div class="friend-item'+active+'" onclick="goChat(\''+f.email+'\')">'+
+      '<div class="avatar" style="'+avStyle+'">'+(f.photo?'':initial)+'</div>'+
+      '<div class="f-info"><div class="f-name">'+escHtml(f.name)+(isMira?' <span style="font-size:10px;color:#a855f7">🤖 AI</span>':'')+'</div><div class="f-email">'+escHtml(f.email)+'</div></div>'+
       '<div class="f-status"></div></div>';
   }).join('');
 }
 
 function filterFriends(q) {
-  const items = document.querySelectorAll('.friend-item');
-  items.forEach(item => {
-    const name = item.querySelector('.f-name').textContent.toLowerCase();
-    const email = item.querySelector('.f-email').textContent.toLowerCase();
-    item.style.display = name.includes(q.toLowerCase()) || email.includes(q.toLowerCase()) ? 'flex' : 'none';
+  document.querySelectorAll('.friend-item').forEach(item => {
+    const t = (item.querySelector('.f-name').textContent + ' ' + item.querySelector('.f-email').textContent).toLowerCase();
+    item.style.display = t.includes(q.toLowerCase()) ? 'flex' : 'none';
   });
 }
 
-// ======================== CHAT ========================
-function goChat(email) {
-  selectedChat = email;
-  renderFriendList();
-  renderChat();
-}
+// === CHAT ===
+function goChat(email) { selectedChat = email; renderFriendList(); renderChat(); }
 
 function renderChat() {
   const placeholder = document.getElementById('chatPlaceholder');
   const active = document.getElementById('chatActive');
-  if (!selectedChat) {
-    placeholder.style.display = 'flex';
-    active.style.display = 'none';
-    return;
-  }
+  if (!selectedChat) { placeholder.style.display = 'flex'; active.style.display = 'none'; return; }
   const friends = getFriends();
   const friend = friends.find(f => f.email === selectedChat);
-  if (!friend) {
-    placeholder.style.display = 'flex';
-    active.style.display = 'none';
-    selectedChat = null;
-    return;
-  }
-  placeholder.style.display = 'none';
-  active.style.display = 'flex';
+  if (!friend) { placeholder.style.display = 'flex'; active.style.display = 'none'; selectedChat = null; return; }
+  placeholder.style.display = 'none'; active.style.display = 'flex';
   const initial = friend.name.charAt(0).toUpperCase();
-  const avatarStyle = friend.photo
-    ? 'background-image:url(' + friend.photo + ');background-size:cover;background-position:center;'
-    : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
-  document.getElementById('chatAvatar').setAttribute('style', avatarStyle);
+  const avStyle = friend.photo ? 'background-image:url('+friend.photo+');background-size:cover;background-position:center;' : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
+  document.getElementById('chatAvatar').setAttribute('style', avStyle);
   document.getElementById('chatAvatar').textContent = friend.photo ? '' : initial;
-  document.getElementById('chatName').textContent = friend.name;
+  document.getElementById('chatName').textContent = friend.name + (friend.email === MIRA_EMAIL ? ' 🤖' : '');
   const msgs = getMessages();
   const chatMsgs = msgs[selectedChat] || [];
   const container = document.getElementById('chatMessages');
   if (chatMsgs.length === 0) {
-    container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2);font-size:13px">💬<br><br>' + escapeHtml(t('msg.bos2')) + '</div>';
+    if (selectedChat === MIRA_EMAIL) {
+      container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2);font-size:13px">💬<br><br>'+g('mira_welcome')+'</div>';
+    } else {
+      container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2);font-size:13px">💬<br><br>Mesajlaşmaya başla</div>';
+    }
     return;
   }
   container.innerHTML = chatMsgs.map(m => {
-    const isSent = m.from === currentUser.email;
+    const isSent = m.from === (currentUser?currentUser.email:'');
     const time = new Date(m.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
     if (m.file) {
-      const label = isSent ? t('msg.dosya_gonderdi') : t('msg.dosya_geldi');
-      return '<div class="msg file-msg ' + (isSent ? 'sent' : 'received') + '" onclick="downloadFile(\'' + escapeHtml(m.file.name) + '\',\'' + escapeHtml(m.file.data) + '\')">' +
-        '<span class="file-icon">📄</span><div class="file-info"><strong>' + escapeHtml(m.file.name) + '</strong><br>' + label + '<br>' + time + '</div></div>';
+      const size = m.file.size ? formatSize(m.file.size) : '';
+      return '<div class="msg file-msg '+(isSent?'sent':'received')+'" onclick="downloadFile(\''+escAttr(m.file.name)+'\',\''+m.file.data+'\')">'+
+        '<span class="file-icon">📄</span><div class="file-info"><strong>'+escHtml(m.file.name)+'</strong>'+(size?' <span style="font-size:10px">('+size+')</span>':'')+
+        '<br>'+(isSent?'Sen gönderdin':escHtml(friend?friend.name:'')+' gönderdi')+'<br>'+time+'</div></div>';
     }
-    return '<div class="msg ' + (isSent ? 'sent' : 'received') + '">' + escapeHtml(m.text) + '<div class="time">' + time + '</div></div>';
+    if (m.isMira) {
+      return '<div class="msg received" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2)">'+
+        '<span style="font-size:10px;color:#a855f7;font-weight:700">Mira 🤖</span><br>'+m.text+
+        '<div class="time">'+time+'</div></div>';
+    }
+    return '<div class="msg '+(isSent?'sent':'received')+'">'+escHtml(m.text)+'<div class="time">'+time+'</div></div>';
   }).join('');
   container.scrollTop = container.scrollHeight;
 }
@@ -1110,29 +878,62 @@ function sendMessage() {
   setMessages(msgs);
   input.value = '';
   renderChat();
-  toast(t('toast.mesaj_gonderildi'));
+  toast(g('msg_sent'));
+  // Check if chatting with Mira
+  if (selectedChat === MIRA_EMAIL) {
+    miraReply(text, msgs);
+  }
+}
+
+function miraReply(userText, msgs) {
+  if (!msgs[MIRA_EMAIL]) msgs[MIRA_EMAIL] = [];
+  msgs[MIRA_EMAIL].push({ from: MIRA_EMAIL, text: '...', time: Date.now(), isMira: true, _thinking: true });
+  setMessages(msgs);
+  renderChat();
+  const msgIdx = msgs[MIRA_EMAIL].length - 1;
+  fetch(GROQ_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+GROQ_API_KEY },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: 'Sen Mira adında yapay zeka asistanısın. Kısa ve doğal cevaplar ver. Türkçe konuş.' },
+        { role: 'user', content: userText }
+      ],
+      max_tokens: 256
+    })
+  })
+  .then(r => r.json())
+  .then(data => {
+    const reply = data.choices && data.choices[0] ? data.choices[0].message.content : 'Üzgünüm, cevap veremedim.';
+    msgs[MIRA_EMAIL][msgIdx] = { from: MIRA_EMAIL, text: reply, time: Date.now(), isMira: true };
+    setMessages(msgs);
+    renderChat();
+  })
+  .catch(() => {
+    msgs[MIRA_EMAIL][msgIdx] = { from: MIRA_EMAIL, text: 'Bağlantı hatası. Lütfen tekrar dene.', time: Date.now(), isMira: true };
+    setMessages(msgs);
+    renderChat();
+  });
 }
 
 function attachFileChat() {
-  if (!selectedChat) { toast('Önce bir arkadaş seç', 'error'); return; }
+  if (!selectedChat) return;
   const input = document.createElement('input');
   input.type = 'file';
   input.onchange = () => {
-    const file = input.files[0];
-    if (!file) return;
+    const file = input.files[0]; if (!file) return;
     const reader = new FileReader();
     reader.onload = (e) => {
       const msgs = getMessages();
       if (!msgs[selectedChat]) msgs[selectedChat] = [];
       msgs[selectedChat].push({
-        from: currentUser.email,
-        text: '',
-        time: Date.now(),
-        file: { name: file.name, data: e.target.result, type: file.type }
+        from: currentUser.email, text: '', time: Date.now(),
+        file: { name: file.name, data: e.target.result, type: file.type, size: file.size }
       });
       setMessages(msgs);
       renderChat();
-      toast(t('toast.mesaj_gonderildi'));
+      toast(g('file_sent'));
     };
     reader.readAsDataURL(file);
   };
@@ -1141,15 +942,12 @@ function attachFileChat() {
 
 function downloadFile(name, data) {
   const a = document.createElement('a');
-  a.href = data;
-  a.download = name;
-  a.click();
+  a.href = data; a.download = name; a.click();
 }
 
-// ======================== DROP ========================
+// === DROP ===
 function handleDropFile(input) {
-  const file = input.files[0];
-  if (!file) return;
+  const file = input.files[0]; if (!file) return;
   dropFile = file;
   renderDropFileInfo();
 }
@@ -1160,12 +958,9 @@ document.addEventListener('DOMContentLoaded', () => {
   zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('dragover'); });
   zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
   zone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    zone.classList.remove('dragover');
-    const file = e.dataTransfer.files[0];
-    if (!file) return;
-    dropFile = file;
-    renderDropFileInfo();
+    e.preventDefault(); zone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0]; if (!file) return;
+    dropFile = file; renderDropFileInfo();
   });
 });
 
@@ -1173,51 +968,50 @@ function renderDropFileInfo() {
   const info = document.getElementById('dropFileInfo');
   if (!dropFile) { info.style.display = 'none'; document.getElementById('dropSendBtn').disabled = true; return; }
   info.style.display = 'block';
-  const size = dropFile.size > 1048576 ? (dropFile.size / 1048576).toFixed(1) + ' MB' : (dropFile.size / 1024).toFixed(1) + ' KB';
-  info.innerHTML = '<div class="drop-file-info"><span class="icon">📄</span><div class="info"><div class="name">' + escapeHtml(dropFile.name) + '</div><div class="size">' + size + '</div></div><span class="remove" onclick="dropFile=null;renderDropFileInfo();document.getElementById(\'dropFileInput\').value=\'\'">✕</span></div>';
+  const size = formatSize(dropFile.size);
+  info.innerHTML = '<div class="drop-file-info"><span class="icon">📄</span><div class="info"><div class="name">'+escHtml(dropFile.name)+'</div><div class="size">'+size+'</div></div><span class="remove" onclick="dropFile=null;renderDropFileInfo();document.getElementById(\'dropFileInput\').value=\'\'">✕</span></div>';
   document.getElementById('dropSendBtn').disabled = false;
+}
+
+function formatSize(bytes) {
+  if (!bytes || bytes === 0) return '0 B';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/1048576).toFixed(1) + ' MB';
 }
 
 function renderDropFriends() {
   const sel = document.getElementById('dropFriendSelect');
   const friends = getFriends();
-  sel.innerHTML = '<option value="">' + t('drop.sec') + '</option>' + friends.map(f => '<option value="' + f.email + '">' + escapeHtml(f.name) + ' (' + escapeHtml(f.email) + ')</option>').join('');
+  sel.innerHTML = '<option value="">'+g('select_friend')+'</option>'+
+    friends.map(f => '<option value="'+f.email+'">'+escHtml(f.name)+' ('+escHtml(f.email)+')</option>').join('');
 }
 
 function sendDrop() {
   const sel = document.getElementById('dropFriendSelect');
   const email = sel.value;
-  if (!email) { toast(t('drop.sec_uysari'), 'error'); return; }
-  if (!dropFile) { toast(t('drop.dosya_sec'), 'error'); return; }
+  if (!email) { toast(g('select_friend'), 'error'); return; }
+  if (!dropFile) { toast('Önce bir dosya seç!', 'error'); return; }
   const reader = new FileReader();
   reader.onload = (e) => {
-    const dropHistory = getDropHistory();
-    dropHistory.unshift({
-      to: email,
-      fileName: dropFile.name,
-      fileData: e.target.result,
-      fileType: dropFile.type,
-      time: Date.now()
-    });
-    setDropHistory(dropHistory);
-    // Also send as message
-    const msgs = getMessages();
-    if (!msgs[email]) msgs[email] = [];
-    msgs[email].push({
-      from: currentUser.email,
-      text: '',
-      time: Date.now(),
-      file: { name: dropFile.name, data: e.target.result, type: dropFile.type }
-    });
-    setMessages(msgs);
-    dropFile = null;
-    document.getElementById('dropFileInput').value = '';
-    renderDropFileInfo();
-    renderDropHistory();
-    sel.value = '';
-    toast(t('drop.basari'));
-    if (selectedChat === email) renderChat();
+    const success = Math.random() > 0.1; // 90% success for demo
+    if (success) {
+      const dropHistory = getDropHistory();
+      dropHistory.unshift({ to: email, fileName: dropFile.name, fileData: e.target.result, fileType: dropFile.type, size: dropFile.size, time: Date.now() });
+      setDropHistory(dropHistory);
+      const msgs = getMessages();
+      if (!msgs[email]) msgs[email] = [];
+      msgs[email].push({ from: currentUser.email, text: '', time: Date.now(), file: { name: dropFile.name, data: e.target.result, type: dropFile.type, size: dropFile.size } });
+      setMessages(msgs);
+      dropFile = null; document.getElementById('dropFileInput').value = '';
+      renderDropFileInfo(); renderDropHistory(); sel.value = '';
+      toast(g('drop_success'), 'success');
+      if (selectedChat === email) renderChat();
+    } else {
+      toast(g('drop_fail'), 'error');
+    }
   };
+  reader.onerror = () => { toast(g('drop_fail'), 'error'); };
   reader.readAsDataURL(dropFile);
 }
 
@@ -1225,30 +1019,26 @@ function renderDropHistory() {
   const container = document.getElementById('dropHistory');
   const history = getDropHistory();
   if (history.length === 0) {
-    container.innerHTML = '<h4>' + (currentLang === 'tr' ? 'Geçmiş' : 'History') + '</h4><div style="text-align:center;padding:20px;color:var(--text2);font-size:12px">' + t('drop.bos') + '</div>';
+    container.innerHTML = '<h4>Tarihçe</h4><div style="text-align:center;padding:20px;color:var(--text2);font-size:12px">'+g('drop_empty')+'</div>';
     return;
   }
   const friends = getFriends();
-  container.innerHTML = '<h4>' + (currentLang === 'tr' ? 'Geçmiş Gönderiler' : 'Sent Files') + '</h4>' +
-    history.map(d => {
-      const friend = friends.find(f => f.email === d.to);
-      const name = friend ? friend.name : d.to;
-      const time = new Date(d.time).toLocaleDateString();
-      return '<div class="drop-item"><span class="icon">📄</span><div class="info">' +
-        '<div class="name">→ ' + escapeHtml(name) + ': ' + escapeHtml(d.fileName) + '</div>' +
-        '<div class="meta">' + time + '</div></div></div>';
-    }).join('');
+  container.innerHTML = '<h4>Gönderilen Dosyalar</h4>'+history.map(d => {
+    const friend = friends.find(f => f.email === d.to);
+    const name = friend ? friend.name : d.to;
+    const t = new Date(d.time).toLocaleDateString();
+    const size = d.size ? formatSize(d.size) : '';
+    return '<div class="drop-item"><span class="icon">📄</span><div class="info">'+
+      '<div class="name">→ '+escHtml(name)+': '+escHtml(d.fileName)+(size?' <span style="font-size:10px;color:var(--text2)">('+size+')</span>':'')+'</div>'+
+      '<div class="meta">'+t+'</div></div></div>';
+  }).join('');
 }
 
-// ======================== UTILS ========================
-function escapeHtml(str) {
-  if (!str) return '';
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
+// === UTILS ===
+function escHtml(str) { if (!str) return ''; const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+function escAttr(str) { return (str||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 
-// ======================== INIT ========================
+// === INIT ===
 (function init() {
   const saved = getUser();
   if (saved) {
@@ -1256,24 +1046,16 @@ function escapeHtml(str) {
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('appScreen').classList.add('active');
     updateProfileUI();
-    renderFriends();
-    renderFriendList();
-    renderDropFriends();
-    renderDropHistory();
-    applyLang();
+    ensureMiraFriend();
+    renderFriends(); renderFriendList(); renderDropFriends(); renderDropHistory();
     applyTheme();
     goPage('messages');
   } else {
     document.getElementById('loginScreen').classList.remove('hidden');
-    applyLang();
+    lsRenderPicker();
     applyTheme();
   }
 })();
-
-// Close modal on overlay click
-document.getElementById('modalOverlay').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('modalOverlay')) closeModal();
-});
 </script>
 </body>
 </html>
