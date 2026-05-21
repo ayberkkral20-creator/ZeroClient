@@ -1,185 +1,1278 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ZeroClient — Indir</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>zero</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#05050a;--bg2:#0a0a18;--text:#f0f2f8;--muted:#64748b;--accent:#3b82f6;--accent2:#6366f1;--accent-glow:rgba(59,130,246,0.25);--card-bg:rgba(10,10,20,0.7);--card-border:rgba(59,130,246,0.08);--success:#22c55e;--hover-lift:translateY(-3px)}
-body{font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;background:var(--bg);color:var(--text);overflow-x:hidden}
-#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-.container{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:40px 20px 60px}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;background:color-mix(in srgb,var(--accent) 8%,transparent);color:var(--accent);font-size:11px;font-weight:700;border:1px solid color-mix(in srgb,var(--accent) 10%,transparent);margin-bottom:16px;letter-spacing:.3px;transition:all .3s}
-.badge:hover{transform:var(--hover-lift);border-color:color-mix(in srgb,var(--accent) 25%,transparent);box-shadow:0 6px 20px var(--accent-glow)}
-header{text-align:center;margin-bottom:28px}
-.logo{width:72px;height:72px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,#0a0a18,#05050a);border:2px solid color-mix(in srgb,var(--accent) 15%,transparent);display:flex;align-items:center;justify-content:center;position:relative;transition:all .4s}
-.logo::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(var(--accent),var(--accent2),var(--accent));opacity:0;transition:opacity .4s;z-index:-1;mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px))}
-.logo:hover::before{opacity:.8}
-.logo:hover{transform:scale(1.05);border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
-.logo canvas{width:44px;height:44px;border-radius:8px}
-h1{font-size:40px;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;transition:all .3s}
-h1:hover{filter:brightness(1.2)}
-.sub{font-size:13px;color:var(--muted)}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:24px}
-.feature{background:var(--card-bg);backdrop-filter:blur(6px);border:1px solid var(--card-border);border-radius:10px;padding:14px 12px;text-align:center;transition:all .3s;cursor:default}
-.feature:hover{border-color:color-mix(in srgb,var(--accent) 20%,transparent);transform:var(--hover-lift);background:color-mix(in srgb,var(--card-bg) 90%,white);box-shadow:0 8px 24px var(--accent-glow)}
-.feature .icon{font-size:22px;margin-bottom:5px}
-.feature .label{font-size:12px;font-weight:700}
-.feature .desc{font-size:10px;color:var(--muted);margin-top:2px}
-.dl-card{background:var(--card-bg);backdrop-filter:blur(8px);border:1px solid var(--card-border);border-radius:16px;padding:24px;margin-bottom:16px;transition:all .3s;text-align:left;display:flex;align-items:center;gap:16px}
-.dl-card:hover{border-color:color-mix(in srgb,var(--accent) 18%,transparent);transform:var(--hover-lift);box-shadow:0 12px 32px var(--accent-glow)}
-.dl-card .icon-box{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 12%,transparent),color-mix(in srgb,var(--accent2) 8%,transparent));border:1px solid color-mix(in srgb,var(--accent) 8%,transparent);transition:all .3s}
-.dl-card:hover .icon-box{transform:scale(1.05);border-color:color-mix(in srgb,var(--accent) 18%,transparent)}
-.dl-card .info{flex:1;min-width:0}
-.dl-card .info .title{font-weight:800;font-size:15px}
-.dl-card .info .desc{font-size:11px;color:var(--muted);margin-top:2px}
-.dl-btn{padding:10px 22px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:13px;font-weight:800;text-decoration:none;transition:all .3s;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:6px;position:relative;overflow:hidden}
-.dl-btn:hover{transform:var(--hover-lift) scale(1.03);box-shadow:0 8px 24px var(--accent-glow)}
-.dl-btn:active{transform:scale(.96)}
-.dl-btn .shine{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-100%);transition:transform .5s}
-.dl-btn:hover .shine{transform:translateX(100%)}
-.info-card{background:var(--card-bg);backdrop-filter:blur(6px);border:1px solid var(--card-border);border-radius:14px;padding:18px 20px;margin-bottom:14px;transition:all .3s}
-.info-card:hover{border-color:color-mix(in srgb,var(--accent) 12%,transparent);transform:var(--hover-lift);box-shadow:0 8px 20px var(--accent-glow)}
-.info-card .row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:12px;border-bottom:1px solid color-mix(in srgb,var(--card-border) 50%,transparent)}
-.info-card .row:last-child{border-bottom:none}
-.info-card .row .label{color:var(--muted)}
-.info-card .row .value{font-weight:600}
-.info-card .row .value strong{color:var(--accent)}
-.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;background:color-mix(in srgb,var(--success) 10%,transparent);color:var(--success)}
-.section-title{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;text-align:left}
-.version-list{display:flex;flex-wrap:wrap;gap:5px;background:var(--card-bg);backdrop-filter:blur(6px);border:1px solid var(--card-border);border-radius:12px;padding:14px;max-height:200px;overflow-y:auto;margin-bottom:16px;transition:all .3s}
-.version-list:hover{border-color:color-mix(in srgb,var(--accent) 10%,transparent);box-shadow:0 4px 12px var(--accent-glow)}
-.version-list .v{display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:5px;font-size:10px;font-weight:600;text-decoration:none;background:color-mix(in srgb,var(--accent) 4%,transparent);border:1px solid color-mix(in srgb,var(--accent) 4%,transparent);color:var(--text);transition:all .25s}
-.version-list .v.ready{background:color-mix(in srgb,var(--success) 8%,transparent);border-color:color-mix(in srgb,var(--success) 8%,transparent);color:var(--success)}
-.version-list .v.ready:hover{transform:var(--hover-lift);border-color:color-mix(in srgb,var(--success) 25%,transparent);box-shadow:0 4px 12px rgba(34,197,94,.12)}
-.version-list .v.nope{opacity:.3;cursor:default}
-footer{text-align:center;font-size:10px;color:var(--muted);opacity:.4;margin-top:20px}
-.version-list::-webkit-scrollbar{width:4px}
-.version-list::-webkit-scrollbar-track{background:transparent}
-.version-list::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--accent) 15%,transparent);border-radius:4px}
-
-/* Uyari button & message */
-.uyari-btn{display:block;width:100%;padding:12px;border-radius:10px;background:color-mix(in srgb,#fbbf24 6%,transparent);border:1px solid color-mix(in srgb,#fbbf24 10%,transparent);color:#fbbf24;font-size:12px;font-weight:700;cursor:pointer;transition:all .3s;text-align:center;margin-bottom:0}
-.uyari-btn:hover{background:color-mix(in srgb,#fbbf24 10%,transparent);border-color:color-mix(in srgb,#fbbf24 18%,transparent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(251,191,36,.1)}
-.uyari-msg{overflow:hidden;max-height:0;opacity:0;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .5s cubic-bezier(.4,0,.2,1),margin .3s;padding:0 16px;background:var(--card-bg);backdrop-filter:blur(6px);border:1px solid color-mix(in srgb,#fbbf24 6%,transparent);border-radius:0 0 12px 12px;margin-top:0;font-size:11px;line-height:1.7;color:var(--muted)}
-.uyari-msg.open{max-height:300px;opacity:1;padding:16px;margin-top:-1px;border-top:1px solid color-mix(in srgb,#fbbf24 8%,transparent)}
-
-@media(max-width:500px){
-  h1{font-size:28px}.features{grid-template-columns:repeat(2,1fr)}
-  .dl-card{flex-wrap:wrap;gap:12px;padding:16px}.dl-btn{width:100%;justify-content:center}
-  .container{padding:24px 14px}.logo{width:60px;height:60px}
+:root {
+  --bg: #f0f2f5;
+  --bg2: #ffffff;
+  --bg3: #e4e6eb;
+  --text: #1c1e21;
+  --text2: #65676b;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --border: #dadde1;
+  --shadow: rgba(0,0,0,0.08);
+  --shadow-hover: rgba(59,130,246,0.2);
+  --hover-bg: rgba(0,0,0,0.04);
+  --card-bg: #fff;
+  --input-bg: #f0f2f5;
+  --danger: #e74c3c;
+  --success: #22c55e;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --transition: 0.3s cubic-bezier(.4,0,.2,1);
 }
-</style></head>
+[data-theme="dark"] {
+  --bg: #18191a;
+  --bg2: #242526;
+  --bg3: #3a3b3c;
+  --text: #e4e6eb;
+  --text2: #b0b3b8;
+  --border: #3e4042;
+  --shadow: rgba(0,0,0,0.3);
+  --shadow-hover: rgba(59,130,246,0.3);
+  --hover-bg: rgba(255,255,255,0.06);
+  --card-bg: #242526;
+  --input-bg: #3a3b3c;
+  --primary: #4a8af4;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  transition:background var(--transition),color var(--transition);
+  min-height:100vh;overflow-x:hidden;
+}
+button,input{font-family:inherit;font-size:14px;outline:none;border:none}
+a{text-decoration:none;color:inherit}
+
+/* === LOGIN SCREEN === */
+#loginScreen{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:var(--bg);z-index:1000;
+  transition:opacity .5s,transform .5s;
+}
+#loginScreen.hidden{opacity:0;transform:scale(1.05);pointer-events:none}
+.login-card{
+  background:var(--bg2);border-radius:20px;padding:48px 40px 40px;
+  width:380px;text-align:center;
+  box-shadow:0 2px 40px var(--shadow);
+  border:1px solid var(--border);
+  transition:all var(--transition);
+}
+.login-card .logo{
+  font-size:52px;font-weight:900;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-2px;margin-bottom:6px;
+}
+.login-card .sub{font-size:13px;color:var(--text2);margin-bottom:32px}
+.login-btn{
+  width:100%;padding:13px;border-radius:var(--radius);
+  background:#fff;border:1px solid var(--border);
+  color:var(--text);font-size:15px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:all var(--transition);
+}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--shadow-hover);border-color:var(--primary)}
+.login-btn:active{transform:scale(.97)}
+.login-btn svg{width:20px;height:20px}
+.login-btn .pill{display:inline-block;padding:1px 8px;border-radius:10px;background:#e8f0fe;color:#1a73e8;font-size:11px;font-weight:700;margin-left:4px}
+.sep{display:flex;align-items:center;gap:12px;margin:18px 0;font-size:12px;color:var(--text2)}
+.sep::before,.sep::after{content:'';flex:1;height:1px;background:var(--border)}
+.login-input{
+  width:100%;padding:12px 14px;border-radius:var(--radius-sm);
+  background:var(--input-bg);color:var(--text);
+  border:1px solid var(--border);margin-bottom:10px;
+  transition:border var(--transition);
+}
+.login-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(59,130,246,0.15)}
+.login-submit{
+  width:100%;padding:12px;border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  color:#fff;font-weight:700;font-size:15px;cursor:pointer;
+  transition:all var(--transition);margin-top:4px;
+}
+.login-submit:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--shadow-hover)}
+.login-submit:active{transform:scale(.97)}
+
+/* === APP LAYOUT === */
+#appScreen{display:none;height:100vh;width:100vw}
+#appScreen.active{display:flex}
+
+/* === SIDEBAR === */
+.sidebar{
+  width:280px;min-width:280px;
+  background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  transition:all var(--transition);
+  position:relative;
+}
+.sidebar-header{
+  padding:16px 18px;font-size:24px;font-weight:900;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-1px;border-bottom:1px solid var(--border);
+}
+.sidebar-menu{flex:1;padding:8px 10px;overflow-y:auto}
+.menu-item{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;border-radius:var(--radius-sm);
+  cursor:pointer;font-weight:600;font-size:14px;
+  color:var(--text2);transition:all var(--transition);
+  margin-bottom:2px;
+}
+.menu-item:hover{background:var(--hover-bg);color:var(--text);transform:translateX(3px)}
+.menu-item.active{background:rgba(59,130,246,0.1);color:var(--primary)}
+.menu-item .icon{width:24px;text-align:center;font-size:18px}
+.theme-toggle-side{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;border-radius:var(--radius-sm);
+  cursor:pointer;font-weight:500;font-size:13px;
+  color:var(--text2);transition:all var(--transition);
+  margin:4px 0;
+}
+.theme-toggle-side:hover{background:var(--hover-bg);color:var(--text)}
+
+/* Profile in sidebar bottom */
+.sidebar-profile{
+  border-top:1px solid var(--border);padding:10px 14px;
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  transition:all var(--transition);position:relative;
+}
+.sidebar-profile:hover{background:var(--hover-bg)}
+.sidebar-profile .avatar{
+  width:36px;height:36px;border-radius:50%;object-fit:cover;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:15px;flex-shrink:0;
+}
+.sidebar-profile .info{flex:1;min-width:0}
+.sidebar-profile .name{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-profile .email{font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* === MAIN CONTENT === */
+.main-content{
+  flex:1;display:flex;flex-direction:column;
+  background:var(--bg);position:relative;
+}
+.page{display:none;flex:1;padding:0}
+.page.active{display:flex;flex-direction:column}
+
+/* === MESSAGES PAGE === */
+.messages-layout{display:flex;flex:1;height:100%}
+.friend-list{
+  width:300px;min-width:300px;
+  border-right:1px solid var(--border);
+  background:var(--bg2);display:flex;flex-direction:column;
+}
+.friend-list-header{
+  padding:16px 18px;font-weight:700;font-size:16px;
+  border-bottom:1px solid var(--border);
+}
+.friend-search{
+  padding:8px 12px;
+}
+.friend-search input{
+  width:100%;padding:8px 12px;border-radius:20px;
+  background:var(--input-bg);color:var(--text);
+  border:1px solid var(--border);font-size:13px;
+  transition:border var(--transition);
+}
+.friend-search input:focus{border-color:var(--primary)}
+.friend-items{flex:1;overflow-y:auto;padding:4px 0}
+.friend-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 14px;cursor:pointer;transition:all var(--transition);
+}
+.friend-item:hover{background:var(--hover-bg)}
+.friend-item.active{background:rgba(59,130,246,0.08)}
+.friend-item .avatar{
+  width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:14px;
+}
+.friend-item .f-info{flex:1;min-width:0}
+.friend-item .f-name{font-weight:600;font-size:13px}
+.friend-item .f-email{font-size:11px;color:var(--text2)}
+.friend-item .f-status{width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0}
+.no-friends{
+  text-align:center;padding:40px 20px;color:var(--text2);font-size:13px;line-height:1.7;
+}
+.no-friends strong{color:var(--primary);cursor:pointer}
+.no-friends strong:hover{text-decoration:underline}
+
+.chat-area{
+  flex:1;display:flex;flex-direction:column;background:var(--bg);
+}
+.chat-header{
+  padding:12px 18px;font-weight:700;font-size:15px;
+  border-bottom:1px solid var(--border);background:var(--bg2);
+  display:flex;align-items:center;gap:10px;
+}
+.chat-header .avatar{
+  width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:12px;
+}
+.chat-messages{
+  flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px;
+}
+.msg{max-width:70%;padding:8px 14px;border-radius:18px;font-size:13px;line-height:1.5;word-break:break-word}
+.msg.sent{background:var(--primary);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg.received{background:var(--bg3);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.msg .time{font-size:10px;opacity:.6;margin-top:3px;text-align:right}
+.msg.file-msg{
+  background:var(--bg2);border:1px solid var(--border);cursor:pointer;
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+}
+.msg.file-msg:hover{border-color:var(--primary)}
+.msg.file-msg .file-icon{font-size:20px}
+.msg.file-msg .file-info{font-size:11px;color:var(--text2)}
+.msg.file-msg.sent{background:rgba(59,130,246,0.08);border-color:var(--primary)}
+.chat-input-area{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  background:var(--bg2);border-top:1px solid var(--border);
+}
+.chat-input-area input{
+  flex:1;padding:9px 14px;border-radius:20px;
+  background:var(--input-bg);color:var(--text);
+  border:1px solid var(--border);font-size:13px;
+  transition:border var(--transition);
+}
+.chat-input-area input:focus{border-color:var(--primary)}
+.chat-input-area .cbtn{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all var(--transition);
+  background:var(--primary);color:#fff;font-size:16px;flex-shrink:0;
+}
+.chat-input-area .cbtn:hover{transform:scale(1.08);box-shadow:0 4px 12px var(--shadow-hover)}
+.chat-input-area .cbtn.attach{background:var(--bg3);color:var(--text2)}
+.chat-input-area .cbtn.attach:hover{background:var(--primary);color:#fff}
+.chat-placeholder{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  color:var(--text2);font-size:14px;text-align:center;padding:40px;
+  line-height:1.7;
+}
+
+/* === FRIENDS PAGE === */
+.friends-content{padding:20px;flex:1;overflow-y:auto}
+.friends-content h3{font-size:16px;margin-bottom:14px}
+.add-friend-card{
+  background:var(--bg2);border-radius:var(--radius);
+  border:1px solid var(--border);padding:18px;
+  margin-bottom:16px;transition:all var(--transition);
+}
+.add-friend-card:hover{box-shadow:0 4px 16px var(--shadow);transform:translateY(-2px)}
+.add-friend-card .label{font-weight:600;font-size:13px;margin-bottom:8px}
+.add-friend-card .row{display:flex;gap:8px}
+.add-friend-card input{
+  flex:1;padding:10px 14px;border-radius:var(--radius-sm);
+  background:var(--input-bg);color:var(--text);
+  border:1px solid var(--border);font-size:13px;
+  transition:border var(--transition);
+}
+.add-friend-card input:focus{border-color:var(--primary)}
+.add-friend-card .add-btn{
+  padding:10px 20px;border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  color:#fff;font-weight:700;font-size:13px;cursor:pointer;
+  transition:all var(--transition);white-space:nowrap;
+}
+.add-friend-card .add-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--shadow-hover)}
+.friends-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.friend-card{
+  background:var(--bg2);border-radius:var(--radius);
+  border:1px solid var(--border);padding:16px;text-align:center;
+  transition:all var(--transition);cursor:pointer;
+}
+.friend-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px var(--shadow-hover);border-color:var(--primary)}
+.friend-card .avatar{
+  width:56px;height:56px;border-radius:50%;object-fit:cover;margin:0 auto 8px;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:20px;
+}
+.friend-card .fname{font-weight:700;font-size:14px}
+.friend-card .femail{font-size:11px;color:var(--text2);margin-top:2px}
+.friend-card .factions{margin-top:10px;display:flex;gap:6px;justify-content:center}
+.friend-card .fbtn{
+  padding:6px 14px;border-radius:6px;font-size:11px;font-weight:700;
+  cursor:pointer;transition:all var(--transition);
+}
+.friend-card .fbtn.msg{background:rgba(59,130,246,0.1);color:var(--primary)}
+.friend-card .fbtn.msg:hover{background:var(--primary);color:#fff}
+.friend-card .fbtn.del{background:rgba(231,76,60,0.1);color:var(--danger)}
+.friend-card .fbtn.del:hover{background:var(--danger);color:#fff}
+
+/* === DROP PAGE === */
+.drop-content{flex:1;padding:20px;overflow-y:auto}
+.drop-card{
+  background:var(--bg2);border-radius:var(--radius);
+  border:1px solid var(--border);padding:24px;text-align:center;
+  transition:all var(--transition);
+}
+.drop-card:hover{box-shadow:0 4px 20px var(--shadow);transform:translateY(-3px)}
+.drop-zone{
+  border:2px dashed var(--border);border-radius:var(--radius);
+  padding:40px 20px;margin-bottom:16px;cursor:pointer;
+  transition:all var(--transition);position:relative;
+}
+.drop-zone:hover,.drop-zone.dragover{border-color:var(--primary);background:rgba(59,130,246,0.04)}
+.drop-zone .icon{font-size:48px;margin-bottom:8px}
+.drop-zone .text{font-weight:600;font-size:14px;color:var(--text2)}
+.drop-zone .sub{font-size:11px;color:var(--text2);margin-top:4px}
+.drop-file-info{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:14px;
+  text-align:left;
+}
+.drop-file-info .icon{font-size:24px}
+.drop-file-info .info{flex:1;min-width:0}
+.drop-file-info .name{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drop-file-info .size{font-size:11px;color:var(--text2)}
+.drop-file-info .remove{cursor:pointer;color:var(--danger);font-weight:700;font-size:16px;padding:4px;transition:all var(--transition)}
+.drop-file-info .remove:hover{transform:scale(1.2)}
+.drop-select-friend{width:100%;padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:12px;
+  background:var(--input-bg);color:var(--text);border:1px solid var(--border);font-size:13px;
+  transition:border var(--transition);cursor:pointer;
+}
+.drop-select-friend:focus{border-color:var(--primary)}
+.drop-send-btn{
+  width:100%;padding:12px;border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  color:#fff;font-weight:700;font-size:14px;cursor:pointer;
+  transition:all var(--transition);
+}
+.drop-send-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--shadow-hover)}
+.drop-send-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.drop-history{margin-top:16px;text-align:left}
+.drop-history h4{font-size:13px;color:var(--text2);margin-bottom:8px}
+.drop-item{
+  display:flex;align-items:center;gap:10px;padding:8px 12px;
+  background:var(--bg2);border-radius:var(--radius-sm);
+  border:1px solid var(--border);margin-bottom:4px;
+  transition:all var(--transition);
+}
+.drop-item:hover{border-color:var(--primary);transform:translateX(3px)}
+.drop-item .icon{font-size:18px}
+.drop-item .info{flex:1;min-width:0}
+.drop-item .name{font-weight:600;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drop-item .meta{font-size:10px;color:var(--text2)}
+
+/* === SETTINGS PAGE === */
+.settings-content{flex:1;padding:20px;overflow-y:auto;max-width:600px}
+.settings-content h3{font-size:16px;margin-bottom:16px}
+.settings-card{
+  background:var(--bg2);border-radius:var(--radius);
+  border:1px solid var(--border);padding:18px;
+  margin-bottom:14px;transition:all var(--transition);
+}
+.settings-card:hover{box-shadow:0 4px 16px var(--shadow);transform:translateY(-2px)}
+.settings-card .label{font-weight:600;font-size:13px;margin-bottom:6px}
+.settings-card .desc{font-size:11px;color:var(--text2);margin-bottom:10px}
+.settings-card .row{display:flex;gap:8px;align-items:center}
+.settings-card input[type="text"]{
+  flex:1;padding:9px 14px;border-radius:var(--radius-sm);
+  background:var(--input-bg);color:var(--text);
+  border:1px solid var(--border);font-size:13px;
+  transition:border var(--transition);
+}
+.settings-card input[type="text"]:focus{border-color:var(--primary)}
+.settings-card input[type="file"]{display:none}
+.photo-upload{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:var(--radius-sm);
+  background:var(--input-bg);color:var(--text);
+  border:1px solid var(--border);font-size:12px;font-weight:600;
+  cursor:pointer;transition:all var(--transition);
+}
+.photo-upload:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.settings-card .save-btn{
+  padding:9px 20px;border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  color:#fff;font-weight:700;font-size:13px;cursor:pointer;
+  transition:all var(--transition);white-space:nowrap;
+}
+.settings-card .save-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--shadow-hover)}
+.lang-btns{display:flex;gap:8px}
+.lang-btn{
+  padding:8px 20px;border-radius:var(--radius-sm);
+  background:var(--input-bg);color:var(--text);
+  border:1px solid var(--border);font-size:13px;font-weight:600;
+  cursor:pointer;transition:all var(--transition);
+}
+.lang-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--shadow-hover)}
+.lang-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.avatar-preview{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;
+  background:linear-gradient(135deg,var(--primary),#6366f1);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:28px;
+}
+
+/* === MODAL === */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.5);
+  display:none;align-items:center;justify-content:center;z-index:2000;
+  backdrop-filter:blur(4px);
+}
+.modal-overlay.active{display:flex}
+.modal{
+  background:var(--bg2);border-radius:16px;padding:24px;
+  width:400px;max-width:90vw;border:1px solid var(--border);
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  transition:all var(--transition);
+}
+.modal h3{font-size:16px;margin-bottom:12px}
+.modal p{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:16px}
+.modal .modal-btns{display:flex;gap:8px;justify-content:flex-end}
+.modal .modal-btn{
+  padding:8px 18px;border-radius:var(--radius-sm);font-weight:600;font-size:13px;
+  cursor:pointer;transition:all var(--transition);
+}
+.modal .modal-btn.primary{background:var(--primary);color:#fff}
+.modal .modal-btn.primary:hover{transform:translateY(-2px);box-shadow:0 4px 12px var(--shadow-hover)}
+.modal .modal-btn.secondary{background:var(--input-bg);color:var(--text)}
+.modal .modal-btn.secondary:hover{background:var(--bg3)}
+
+/* === TOAST === */
+.toast{
+  position:fixed;bottom:20px;right:20px;z-index:3000;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px 20px;
+  box-shadow:0 8px 30px var(--shadow);
+  font-size:13px;font-weight:600;
+  transform:translateY(100px);opacity:0;
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  max-width:360px;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-left:4px solid var(--success)}
+.toast.error{border-left:4px solid var(--danger)}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text2)}
+
+/* === RESPONSIVE === */
+@media(max-width:768px){
+  .sidebar{width:60px;min-width:60px}
+  .sidebar .menu-item span,.theme-toggle-side span,.sidebar .sidebar-header,.sidebar-profile .info{display:none}
+  .sidebar .menu-item,.theme-toggle-side{justify-content:center;padding:11px 8px}
+  .sidebar .menu-item .icon{margin:0}
+  .sidebar-profile{justify-content:center;padding:8px}
+  .friend-list{width:200px;min-width:200px}
+  .login-card{width:340px;padding:32px 24px}
+}
+@media(max-width:500px){
+  .messages-layout{flex-direction:column}
+  .friend-list{width:100%;min-width:100%;max-height:40vh}
+  .sidebar{width:50px;min-width:50px}
+}
+</style>
+</head>
 <body>
-<canvas id="bgCanvas"></canvas>
-<div class="container">
-  <header>
-    <div class="badge">&#10022; v2.0 &middot; ZeroClient</div>
-    <div class="logo"><canvas id="logoCanvas" width="44" height="44"></canvas></div>
-    <h1>ZeroClient</h1>
-    <p class="sub">Masaustu Launcher &middot; 44 Surum &middot; Fabric &middot; Java 21 dahil</p>
-  </header>
 
-  <div class="features">
-    <div class="feature"><div class="icon">&#127769;</div><div class="label">Night Vision</div><div class="desc">Gamma 15.0</div></div>
-    <div class="feature"><div class="icon">&#10084;&#65039;</div><div class="label">Can Gorme</div><div class="desc">Oyuncu ustu HP</div></div>
-    <div class="feature"><div class="icon">&#128230;</div><div class="label">Fabric API</div><div class="desc">Gerekmez</div></div>
-    <div class="feature"><div class="icon">&#127760;</div><div class="label">Oto Baglan</div><div class="desc">z.ayberkkral19.workers.dev</div></div>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="logo">zero</div>
+    <div class="sub" data-tr="zero.giris">Giriş yap ve bağlan</div>
+    <button class="login-btn" onclick="loginWithGoogle()">
+      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59A14.5 14.5 0 0 1 9.5 24c0-1.59.28-3.14.76-4.59l-7.98-6.19A23.99 23.99 0 0 0 0 24c0 3.77.87 7.35 2.56 10.56l7.97-5.97z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 5.97C6.51 42.62 14.62 48 24 48z"/></svg>
+      Google ile Giriş Yap <span class="pill" data-tr="zero.oneri">önerilen</span>
+    </button>
+    <div class="sep" data-tr="zero.veya">veya</div>
+    <input class="login-input" id="loginEmail" type="email" placeholder="Gmail adresin" data-tr="zero.gmail_placeholder">
+    <input class="login-input" id="loginName" type="text" placeholder="İsmin" data-tr="zero.isim_placeholder">
+    <button class="login-submit" onclick="loginWithEmail()" data-tr="zero.giris_btn">Giriş Yap</button>
   </div>
+</div>
 
-  <div class="section-title">&#127916; Video</div>
-  <div style="background:var(--card-bg);backdrop-filter:blur(6px);border:1px solid var(--card-border);border-radius:14px;padding:12px;margin-bottom:16px;transition:all .3s">
-    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px">
-      <iframe style="position:absolute;top:0;left:0;width:100%;height:100%" src="https://www.youtube.com/embed/kPSVP6tHixI" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+<!-- APP -->
+<div id="appScreen">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">zero</div>
+    <div class="sidebar-menu">
+      <div class="menu-item active" data-page="messages" onclick="goPage('messages')">
+        <span class="icon">💬</span><span data-tr="menu.mesajlar">Mesajlar</span>
+      </div>
+      <div class="menu-item" data-page="friends" onclick="goPage('friends')">
+        <span class="icon">👥</span><span data-tr="menu.arkadaslar">Arkadaşlar</span>
+      </div>
+      <div class="menu-item" data-page="drop" onclick="goPage('drop')">
+        <span class="icon">📤</span><span data-tr="menu.drop">Drop</span>
+      </div>
+      <div class="menu-item" data-page="settings" onclick="goPage('settings')">
+        <span class="icon">⚙️</span><span data-tr="menu.ayarlar">Ayarlar</span>
+      </div>
+      <div class="theme-toggle-side" onclick="toggleTheme()">
+        <span class="icon" id="themeIcon">🌙</span><span id="themeLabel" data-tr="menu.karanlik">Karanlık Mod</span>
+      </div>
+    </div>
+    <div class="sidebar-profile" onclick="goPage('settings')">
+      <div class="avatar" id="sidebarAvatar">Z</div>
+      <div class="info">
+        <div class="name" id="sidebarName">İsim</div>
+        <div class="email" id="sidebarEmail">email</div>
+      </div>
     </div>
   </div>
 
-  <div class="dl-card">
-    <div class="icon-box">&#9889;</div>
-    <div class="info">
-      <div class="title">ZeroClient.exe</div>
-      <div class="desc">Native Qt6 arayuz &middot; Java 21 dahil &middot; 233 MB</div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- MESSAGES -->
+    <div class="page active" id="page-messages">
+      <div class="messages-layout">
+        <div class="friend-list">
+          <div class="friend-list-header" data-tr="msg.arkadaslar">Arkadaşlar</div>
+          <div class="friend-search">
+            <input type="text" placeholder="Ara..." oninput="filterFriends(this.value)" data-tr="msg.ara">
+          </div>
+          <div class="friend-items" id="friendItems"></div>
+        </div>
+        <div class="chat-area" id="chatArea">
+          <div class="chat-placeholder" id="chatPlaceholder">
+            <div data-tr="msg.bos">💬<br><br><strong data-tr="msg.bos2">Arkadaşın yok!</strong><br><span data-tr="msg.bos3">Arkadaş eklemek için sol menüdeki Arkadaş Ekle butonuna tıkla ve Gmail adresini yaz.</span></div>
+          </div>
+          <div id="chatActive" style="display:none;flex:1;display:none;flex-direction:column">
+            <div class="chat-header">
+              <div class="avatar" id="chatAvatar">Z</div>
+              <span id="chatName">İsim</span>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-area">
+              <div class="cbtn attach" onclick="attachFileChat()" title="Dosya ekle">📎</div>
+              <input type="text" id="chatInput" placeholder="Mesaj yaz..." onkeydown="if(event.key==='Enter')sendMessage()" data-tr="msg.yaz">
+              <div class="cbtn" onclick="sendMessage()">➤</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <a class="dl-btn" href="https://github.com/ayberkkral20-creator/ZeroClient/releases/download/v2.1/ZeroClient.exe" download="ZeroClient.exe">
-      <span class="shine"></span>&#11015; Indir
-    </a>
-  </div>
 
-  <button class="uyari-btn" id="uyariBtn">&#9888; UYARI</button>
-  <div class="uyari-msg" id="uyariMsg">
-    <strong>UYARI!</strong> Bunu indirdiğinizde virüsmüş gibi muamele görebilirsiniz ancak virüs değil. Ve indirdiğinizde biraz yavaş açılabilir, sorun yapmayınız.
-  </div>
+    <!-- FRIENDS -->
+    <div class="page" id="page-friends">
+      <div class="friends-content">
+        <h3 data-tr="friends.arkadaslarim">Arkadaşlarım</h3>
+        <div class="add-friend-card">
+          <div class="label" data-tr="friends.ekle_baslik">Yeni Arkadaş Ekle</div>
+          <div class="row">
+            <input type="email" id="addFriendInput" placeholder="Gmail adresi yaz..." data-tr="friends.ekle_placeholder">
+            <button class="add-btn" onclick="addFriend()" data-tr="friends.ekle_btn">Ekle</button>
+          </div>
+        </div>
+        <div id="friendsList"></div>
+      </div>
+    </div>
 
-  <div class="info-card" style="margin-top:14px">
-    <div class="row"><span class="label">Yayinci</span><span class="value"><strong>WOX_TR</strong></span></div>
-    <div class="row"><span class="label">Surum</span><span class="value">2.0.0</span></div>
-    <div class="row"><span class="label">Sunucu</span><span class="value"><strong>z.ayberkkral19.workers.dev</strong> <span class="tag">otomatik</span></span></div>
-    <div class="row"><span class="label">Java</span><span class="value">21 &mdash; otomatik indirilir</span></div>
-    <div class="row"><span class="label">Kurulum</span><span class="value">Indir &rarr; Calistir &rarr; Oyna</span></div>
-  </div>
+    <!-- DROP -->
+    <div class="page" id="page-drop">
+      <div class="drop-content">
+        <div class="drop-card">
+          <div class="drop-zone" id="dropZone" onclick="document.getElementById('dropFileInput').click()">
+            <div class="icon">📁</div>
+            <div class="text" data-tr="drop.birak">Dosyayı buraya sürükle veya tıkla</div>
+            <div class="sub" data-tr="drop.boyut">Video, fotoğraf, zip — her şey</div>
+            <input type="file" id="dropFileInput" style="display:none" onchange="handleDropFile(this)">
+          </div>
+          <div id="dropFileInfo" style="display:none"></div>
+          <select class="drop-select-friend" id="dropFriendSelect">
+            <option value="" data-tr="drop.sec">— Arkadaş seç —</option>
+          </select>
+          <button class="drop-send-btn" id="dropSendBtn" onclick="sendDrop()" disabled data-tr="drop.gonder">Gönder</button>
+          <div class="drop-history" id="dropHistory"></div>
+        </div>
+      </div>
+    </div>
 
-  <div class="section-title">&#10022; Surumler</div>
-  <div class="version-list" id="vlist"></div>
-
-  <div class="info-card" style="border-color:color-mix(in srgb,#a855f7 8%,transparent)">
-    <div style="font-size:11px;color:var(--muted);line-height:1.7">
-      <strong style="color:#a855f7">&#128100; Skinli Hesap istiyorsan</strong>
-      <a href="https://namemc.com" target="_blank" style="color:var(--accent);font-weight:700;text-decoration:none;border-bottom:1px dashed color-mix(in srgb,var(--accent) 30%,transparent)">buraya tikla</a>
-      &rarr; namemc.com
+    <!-- SETTINGS -->
+    <div class="page" id="page-settings">
+      <div class="settings-content">
+        <h3 data-tr="ayarlar.baslik">Ayarlar</h3>
+        <div class="settings-card">
+          <div class="label" data-tr="ayarlar.profil">Profil</div>
+          <div class="desc" data-tr="ayarlar.profil_desc">Profil fotoğrafın ve ismin</div>
+          <div class="avatar-preview" id="settingsAvatarPreview">Z</div>
+          <input type="file" id="photoInput" accept="image/*" onchange="changePhoto(this)">
+          <label class="photo-upload" for="photoInput" data-tr="ayarlar.foto_degistir">📷 Fotoğraf Değiştir</label>
+        </div>
+        <div class="settings-card">
+          <div class="label" data-tr="ayarlar.isim">İsim</div>
+          <div class="row">
+            <input type="text" id="nameInput" placeholder="İsmin">
+            <button class="save-btn" onclick="saveName()" data-tr="ayarlar.kaydet">Kaydet</button>
+          </div>
+        </div>
+        <div class="settings-card">
+          <div class="label" data-tr="ayarlar.dil">Dil / Language</div>
+          <div class="desc" data-tr="ayarlar.dil_desc">Uygulama dilini değiştir</div>
+          <div class="lang-btns">
+            <button class="lang-btn active" data-lang="tr" onclick="setLang('tr')">Türkçe</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
+          </div>
+        </div>
+        <div class="settings-card">
+          <div class="label" data-tr="ayarlar.tema">Tema</div>
+          <div class="desc" data-tr="ayarlar.tema_desc">Aydınlık / Karanlık mod</div>
+          <button class="save-btn" onclick="toggleTheme()" id="themeToggleBtn" data-tr="ayarlar.tema_degistir">🌙 Karanlık Mod</button>
+        </div>
+        <div class="settings-card">
+          <div class="label" data-tr="ayarlar.cikis">Çıkış Yap</div>
+          <div class="desc" data-tr="ayarlar.cikis_desc">Hesabından çık ve giriş ekranına dön</div>
+          <button class="save-btn" style="background:var(--danger)" onclick="logout()" data-tr="ayarlar.cikis_btn">🚪 Çıkış Yap</button>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 
-  <div class="info-card" style="border-color:color-mix(in srgb,#fbbf24 8%,transparent);margin-top:4px">
-    <div style="font-size:11px;color:var(--muted);line-height:1.7">
-      <strong style="color:#fbbf24">&#9888; Guvenlik Uyarisi:</strong> Imzasiz EXE oldugu icin Windows "taninmiyor" diye uyarabilir.
-      "Calistirmak istediginizden emin misiniz?" yazarsa &rarr; <strong style="color:var(--success)">"Calistir"a tiklayin</strong>.
-      Bilgisayariniza zarar vermez. WOX_TR tarafindan yapildi.
+<!-- CONFIRM MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalTitle">Uyarı</h3>
+    <p id="modalText">Emin misin?</p>
+    <div class="modal-btns">
+      <button class="modal-btn secondary" onclick="closeModal()" data-tr="modal.iptal">İptal</button>
+      <button class="modal-btn primary" id="modalConfirmBtn" onclick="closeModal()">Tamam</button>
     </div>
   </div>
-
-  <footer>ZeroClient &middot; WOX_TR</footer>
 </div>
 
 <script>
-const c=document.getElementById('bgCanvas'),ctx=c.getContext('2d');
-let W,H,pts=[];
-function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-function p(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+.5}}
-function init(){resize();pts=[];for(let i=0;i<45;i++)pts.push(p())}
-function anim(){ctx.clearRect(0,0,W,H);const t=Date.now()/1000;
-pts.forEach((pt,i)=>{pt.x+=pt.vx+Math.sin(t+i)*.03;pt.y+=pt.vy+Math.cos(t+i)*.03;
-if(pt.x<0||pt.x>W)pt.vx*=-1;if(pt.y<0||pt.y>H)pt.vy*=-1;
-ctx.beginPath();ctx.arc(pt.x,pt.y,pt.r,0,Math.PI*2);
-ctx.fillStyle='rgba(59,130,246,0.06)';ctx.fill();
-for(let j=i+1;j<pts.length;j++){const dx=pt.x-pts[j].x,dy=pt.y-pts[j].y,d=dx*dx+dy*dy;
-if(d<12000){ctx.beginPath();ctx.moveTo(pt.x,pt.y);ctx.lineTo(pts[j].x,pts[j].y);
-ctx.strokeStyle='rgba(99,102,241,'+(.035-d/340000).toFixed(3)+')';ctx.lineWidth=.5;ctx.stroke()}}});
-requestAnimationFrame(anim)}
-init();anim();window.addEventListener('resize',()=>{resize()});
+// ======================== TRANSLATIONS ========================
+const STR = {
+  tr: {
+    'zero.giris': 'Giriş yap ve bağlan',
+    'zero.oneri': 'önerilen',
+    'zero.veya': 'veya',
+    'zero.gmail_placeholder': 'Gmail adresin',
+    'zero.isim_placeholder': 'İsmin',
+    'zero.giris_btn': 'Giriş Yap',
+    'menu.mesajlar': 'Mesajlar',
+    'menu.arkadaslar': 'Arkadaşlar',
+    'menu.drop': 'Drop',
+    'menu.ayarlar': 'Ayarlar',
+    'menu.karanlik': 'Karanlık Mod',
+    'msg.arkadaslar': 'Arkadaşlar',
+    'msg.ara': 'Ara...',
+    'msg.bos': '💬<br><br><strong>Arkadaşın yok!</strong><br>Arkadaş eklemek için<br>sol menüdeki Arkadaşlar butonuna tıkla ve Gmail adresini yaz.',
+    'msg.bos2': 'Arkadaşın yok!',
+    'msg.bos3': 'Arkadaş eklemek için<br>sol menüdeki Arkadaşlar butonuna tıkla ve Gmail adresini yaz.',
+    'msg.yaz': 'Mesaj yaz...',
+    'msg.dosya_geldi': 'bir dosya gönderdi',
+    'msg.dosya_gonderdi': 'bir dosya gönderdin',
+    'friends.arkadaslarim': 'Arkadaşlarım',
+    'friends.ekle_baslik': 'Yeni Arkadaş Ekle',
+    'friends.ekle_placeholder': 'Gmail adresi yaz...',
+    'friends.ekle_btn': 'Ekle',
+    'friends.no_friends': 'Henüz arkadaşın yok. Yukarıdan Gmail ile arkadaş ekle.',
+    'friends.no_friends_title': 'Arkadaşın yok!',
+    'drop.birak': 'Dosyayı buraya sürükle veya tıkla',
+    'drop.boyut': 'Video, fotoğraf, zip — her şey',
+    'drop.sec': '— Arkadaş seç —',
+    'drop.gonder': 'Gönder',
+    'drop.gonder_btn': 'Gönder',
+    'drop.bos': 'Henüz gönderilen dosya yok.',
+    'drop.basari': 'Dosya başarıyla gönderildi!',
+    'drop.sec_uysari': 'Önce bir arkadaş seç!',
+    'drop.dosya_sec': 'Önce bir dosya seç!',
+    'ayarlar.baslik': 'Ayarlar',
+    'ayarlar.profil': 'Profil',
+    'ayarlar.profil_desc': 'Profil fotoğrafın ve ismin',
+    'ayarlar.foto_degistir': '📷 Fotoğraf Değiştir',
+    'ayarlar.isim': 'İsim',
+    'ayarlar.kaydet': 'Kaydet',
+    'ayarlar.dil': 'Dil / Language',
+    'ayarlar.dil_desc': 'Uygulama dilini değiştir',
+    'ayarlar.tema': 'Tema',
+    'ayarlar.tema_desc': 'Aydınlık / Karanlık mod',
+    'ayarlar.tema_degistir': '🌙 Karanlık Mod',
+    'ayarlar.cikis': 'Çıkış Yap',
+    'ayarlar.cikis_desc': 'Hesabından çık ve giriş ekranına dön',
+    'ayarlar.cikis_btn': '🚪 Çıkış Yap',
+    'modal.iptal': 'İptal',
+    'modal.evet': 'Evet',
+    'toast.kaydedildi': 'Kaydedildi ✅',
+    'toast.arkadas_eklendi': 'Arkadaş eklendi ✅',
+    'toast.arkadas_zaten': 'Bu kişi zaten arkadaşın!',
+    'toast.arkadas_kendin': 'Kendini ekleyemezsin!',
+    'toast.arkadas_silindi': 'Arkadaş silindi',
+    'toast.mesaj_gonderildi': 'Mesaj gönderildi',
+    'toast.foto_degisti': 'Fotoğraf değiştirildi ✅',
+    'toast.isim_kaydedildi': 'İsim kaydedildi ✅',
+  },
+  en: {
+    'zero.giris': 'Sign in and connect',
+    'zero.oneri': 'recommended',
+    'zero.veya': 'or',
+    'zero.gmail_placeholder': 'Your Gmail',
+    'zero.isim_placeholder': 'Your name',
+    'zero.giris_btn': 'Sign In',
+    'menu.mesajlar': 'Messages',
+    'menu.arkadaslar': 'Friends',
+    'menu.drop': 'Drop',
+    'menu.ayarlar': 'Settings',
+    'menu.karanlik': 'Dark Mode',
+    'msg.arkadaslar': 'Friends',
+    'msg.ara': 'Search...',
+    'msg.bos': '💬<br><br><strong>You have no friends!</strong><br>Go to Friends in the sidebar and add by Gmail.',
+    'msg.bos2': 'You have no friends!',
+    'msg.bos3': 'Go to Friends in the sidebar and add by Gmail.',
+    'msg.yaz': 'Write a message...',
+    'msg.dosya_geldi': 'sent you a file',
+    'msg.dosya_gonderdi': 'you sent a file',
+    'friends.arkadaslarim': 'My Friends',
+    'friends.ekle_baslik': 'Add New Friend',
+    'friends.ekle_placeholder': 'Enter Gmail address...',
+    'friends.ekle_btn': 'Add',
+    'friends.no_friends': 'No friends yet. Add friends by Gmail above.',
+    'friends.no_friends_title': 'No friends!',
+    'drop.birak': 'Drag & drop a file or click',
+    'drop.boyut': 'Video, photo, zip — anything',
+    'drop.sec': '— Select a friend —',
+    'drop.gonder': 'Send',
+    'drop.gonder_btn': 'Send',
+    'drop.bos': 'No files sent yet.',
+    'drop.basari': 'File sent successfully!',
+    'drop.sec_uysari': 'Select a friend first!',
+    'drop.dosya_sec': 'Select a file first!',
+    'ayarlar.baslik': 'Settings',
+    'ayarlar.profil': 'Profile',
+    'ayarlar.profil_desc': 'Your profile picture and name',
+    'ayarlar.foto_degistir': '📷 Change Photo',
+    'ayarlar.isim': 'Name',
+    'ayarlar.kaydet': 'Save',
+    'ayarlar.dil': 'Dil / Language',
+    'ayarlar.dil_desc': 'Change application language',
+    'ayarlar.tema': 'Theme',
+    'ayarlar.tema_desc': 'Light / Dark mode',
+    'ayarlar.tema_degistir': '🌙 Dark Mode',
+    'ayarlar.cikis': 'Log Out',
+    'ayarlar.cikis_desc': 'Sign out and return to login screen',
+    'ayarlar.cikis_btn': '🚪 Log Out',
+    'modal.iptal': 'Cancel',
+    'modal.evet': 'Yes',
+    'toast.kaydedildi': 'Saved ✅',
+    'toast.arkadas_eklendi': 'Friend added ✅',
+    'toast.arkadas_zaten': 'This person is already your friend!',
+    'toast.arkadas_kendin': "You can't add yourself!",
+    'toast.arkadas_silindi': 'Friend removed',
+    'toast.mesaj_gonderildi': 'Message sent',
+    'toast.foto_degisti': 'Photo changed ✅',
+    'toast.isim_kaydedildi': 'Name saved ✅',
+  }
+};
 
-// Logo
-const lc=document.getElementById('logoCanvas'),lx=lc.getContext('2d');
-lx.clearRect(0,0,44,44);
-const lg=lx.createRadialGradient(22,22,0,22,22,22);
-lg.addColorStop(0,'#3b82f6');lg.addColorStop(1,'#6366f1');
-lx.fillStyle=lg;lx.beginPath();lx.arc(22,22,21,0,Math.PI*2);lx.fill();
-lx.strokeStyle='rgba(255,255,255,.2)';lx.lineWidth=2;
-lx.beginPath();lx.arc(22,22,18,-Math.PI/2,Math.PI*1.5);lx.stroke();
-lx.fillStyle='#fff';lx.font='bold 18px Segoe UI,system-ui,sans-serif';
-lx.textAlign='center';lx.textBaseline='middle';lx.fillText('Z',22,23);
+let currentLang = localStorage.getItem('zero_lang') || 'tr';
+let currentTheme = localStorage.getItem('zero_theme') || 'light';
+let currentUser = null;
+let selectedChat = null;
+let dropFile = null;
 
-// Uyari toggle
-document.getElementById('uyariBtn').addEventListener('click',function(){
-  document.getElementById('uyariMsg').classList.toggle('open');
+// ======================== STATE ========================
+function getFriends() { return JSON.parse(localStorage.getItem('zero_friends') || '[]'); }
+function setFriends(f) { localStorage.setItem('zero_friends', JSON.stringify(f)); }
+function getMessages() { return JSON.parse(localStorage.getItem('zero_msgs') || '{}'); }
+function setMessages(m) { localStorage.setItem('zero_msgs', JSON.stringify(m)); }
+function getDropHistory() { return JSON.parse(localStorage.getItem('zero_drops') || '[]'); }
+function setDropHistory(d) { localStorage.setItem('zero_drops', JSON.stringify(d)); }
+function getUser() { return JSON.parse(localStorage.getItem('zero_user') || 'null'); }
+function setUser(u) { localStorage.setItem('zero_user', JSON.stringify(u)); }
+
+// ======================== TOAST ========================
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  clearTimeout(t._hide);
+  t._hide = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ======================== MODAL ========================
+function showModal(title, text, cb) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalText').textContent = text;
+  const btn = document.getElementById('modalConfirmBtn');
+  btn.onclick = () => { closeModal(); if(cb) cb(); };
+  document.getElementById('modalOverlay').classList.add('active');
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); }
+
+// ======================== LANG ========================
+function t(key) {
+  const lang = STR[currentLang] || STR.tr;
+  return lang[key] || STR.tr[key] || key;
+}
+
+function applyLang() {
+  document.querySelectorAll('[data-tr]').forEach(el => {
+    const key = el.getAttribute('data-tr');
+    el.innerHTML = t(key);
+  });
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === currentLang);
+  });
+  document.documentElement.lang = currentLang === 'tr' ? 'tr' : 'en';
+  document.title = currentLang === 'tr' ? 'zero' : 'zero';
+}
+
+function setLang(l) {
+  currentLang = l;
+  localStorage.setItem('zero_lang', l);
+  applyLang();
+  if (currentUser) {
+    renderFriends();
+    renderFriendList();
+    renderChat();
+    renderDropHistory();
+  }
+}
+
+// ======================== THEME ========================
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'dark' : 'light');
+  document.getElementById('themeIcon').textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  document.getElementById('themeLabel').textContent = currentTheme === 'dark' ? (currentLang === 'tr' ? 'Aydınlık Mod' : 'Light Mode') : (currentLang === 'tr' ? 'Karanlık Mod' : 'Dark Mode');
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) btn.textContent = currentTheme === 'dark' ? '☀️ ' + (currentLang === 'tr' ? 'Aydınlık Mod' : 'Light Mode') : '🌙 ' + (currentLang === 'tr' ? 'Karanlık Mod' : 'Dark Mode');
+}
+
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('zero_theme', currentTheme);
+  applyTheme();
+}
+
+// ======================== LOGIN ========================
+function loginWithGoogle() {
+  const email = document.getElementById('loginEmail').value.trim() || 'kullanici@gmail.com';
+  const name = document.getElementById('loginName').value.trim() || 'Kullanıcı';
+  doLogin(name, email);
+}
+
+function loginWithEmail() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const name = document.getElementById('loginName').value.trim();
+  if (!email) { toast('Gmail adresinizi girin', 'error'); return; }
+  if (!name) { toast('İsminizi girin', 'error'); return; }
+  doLogin(name, email);
+}
+
+function doLogin(name, email) {
+  currentUser = { name, email, photo: null };
+  setUser(currentUser);
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('appScreen').classList.add('active');
+  updateProfileUI();
+  renderFriends();
+  renderFriendList();
+  renderChat();
+  renderDropHistory();
+  applyLang();
+  applyTheme();
+  goPage('messages');
+}
+
+function logout() {
+  showModal(
+    currentLang === 'tr' ? 'Çıkış Yap' : 'Log Out',
+    currentLang === 'tr' ? 'Hesabından çıkmak istediğine emin misin?' : 'Are you sure you want to log out?',
+    () => {
+      currentUser = null;
+      localStorage.removeItem('zero_user');
+      document.getElementById('appScreen').classList.remove('active');
+      document.getElementById('loginScreen').classList.remove('hidden');
+      location.reload();
+    }
+  );
+}
+
+// ======================== PROFILE UI ========================
+function updateProfileUI() {
+  if (!currentUser) return;
+  const initial = currentUser.name.charAt(0).toUpperCase();
+  const updateEl = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (currentUser.photo) {
+      el.innerHTML = '';
+      el.style.backgroundImage = 'url(' + currentUser.photo + ')';
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center';
+    } else {
+      el.style.backgroundImage = '';
+      el.textContent = initial;
+      el.style.background = 'linear-gradient(135deg,var(--primary),#6366f1)';
+    }
+  };
+  updateEl('sidebarAvatar');
+  updateEl('settingsAvatarPreview');
+  document.getElementById('sidebarName').textContent = currentUser.name;
+  document.getElementById('sidebarEmail').textContent = currentUser.email;
+  document.getElementById('nameInput').value = currentUser.name;
+}
+
+// ======================== PHOTO ========================
+function changePhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    currentUser.photo = e.target.result;
+    setUser(currentUser);
+    updateProfileUI();
+    toast(t('toast.foto_degisti'));
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveName() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) return;
+  currentUser.name = name;
+  setUser(currentUser);
+  updateProfileUI();
+  toast(t('toast.isim_kaydedildi'));
+}
+
+// ======================== NAVIGATION ========================
+function goPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelector('.menu-item[data-page="' + page + '"]').classList.add('active');
+  if (page === 'friends') renderFriends();
+  if (page === 'drop') { renderDropFriends(); renderDropHistory(); }
+  if (page === 'messages') renderFriendList();
+}
+
+// ======================== FRIENDS ========================
+function addFriend() {
+  const input = document.getElementById('addFriendInput');
+  const email = input.value.trim().toLowerCase();
+  if (!email || !email.includes('@')) { toast('Geçerli bir Gmail adresi gir', 'error'); return; }
+  if (email === currentUser.email.toLowerCase()) { toast(t('toast.arkadas_kendin'), 'error'); return; }
+  let friends = getFriends();
+  if (friends.find(f => f.email.toLowerCase() === email)) { toast(t('toast.arkadas_zaten'), 'error'); return; }
+  const name = email.split('@')[0].replace(/[._]/g, ' ');
+  const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+  friends.push({ name: displayName, email, photo: null });
+  setFriends(friends);
+  input.value = '';
+  renderFriends();
+  renderFriendList();
+  renderDropFriends();
+  toast(t('toast.arkadas_eklendi'));
+}
+
+function removeFriend(email) {
+  showModal(
+    currentLang === 'tr' ? 'Arkadaş Sil' : 'Remove Friend',
+    currentLang === 'tr' ? 'Bu arkadaşı silmek istediğine emin misin?' : 'Are you sure you want to remove this friend?',
+    () => {
+      let friends = getFriends().filter(f => f.email !== email);
+      setFriends(friends);
+      renderFriends();
+      renderFriendList();
+      renderDropFriends();
+      if (selectedChat && selectedChat === email) { selectedChat = null; renderChat(); }
+      toast(t('toast.arkadas_silindi'));
+    }
+  );
+}
+
+function renderFriends() {
+  const container = document.getElementById('friendsList');
+  const friends = getFriends();
+  if (friends.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2);font-size:13px">' + t('friends.no_friends') + '</div>';
+    return;
+  }
+  container.innerHTML = '<div class="friends-grid">' + friends.map(f => {
+    const initial = f.name.charAt(0).toUpperCase();
+    const avatarStyle = f.photo
+      ? 'background-image:url(' + f.photo + ');background-size:cover;background-position:center;'
+      : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
+    return '<div class="friend-card">' +
+      '<div class="avatar" style="' + avatarStyle + '">' + (f.photo ? '' : initial) + '</div>' +
+      '<div class="fname">' + escapeHtml(f.name) + '</div>' +
+      '<div class="femail">' + escapeHtml(f.email) + '</div>' +
+      '<div class="factions">' +
+      '<button class="fbtn msg" onclick="goChat(\'' + f.email + '\')">💬</button>' +
+      '<button class="fbtn del" onclick="removeFriend(\'' + f.email + '\')">✕</button>' +
+      '</div></div>';
+  }).join('') + '</div>';
+}
+
+function renderFriendList() {
+  const container = document.getElementById('friendItems');
+  const friends = getFriends();
+  if (friends.length === 0) {
+    container.innerHTML = '<div class="no-friends"><strong>' + t('friends.no_friends_title') + '</strong><br>' + t('friends.no_friends') + '</div>';
+    return;
+  }
+  container.innerHTML = friends.map(f => {
+    const active = selectedChat === f.email ? ' active' : '';
+    const initial = f.name.charAt(0).toUpperCase();
+    const avatarStyle = f.photo
+      ? 'background-image:url(' + f.photo + ');background-size:cover;background-position:center;'
+      : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
+    return '<div class="friend-item' + active + '" onclick="goChat(\'' + f.email + '\')">' +
+      '<div class="avatar" style="' + avatarStyle + '">' + (f.photo ? '' : initial) + '</div>' +
+      '<div class="f-info"><div class="f-name">' + escapeHtml(f.name) + '</div><div class="f-email">' + escapeHtml(f.email) + '</div></div>' +
+      '<div class="f-status"></div></div>';
+  }).join('');
+}
+
+function filterFriends(q) {
+  const items = document.querySelectorAll('.friend-item');
+  items.forEach(item => {
+    const name = item.querySelector('.f-name').textContent.toLowerCase();
+    const email = item.querySelector('.f-email').textContent.toLowerCase();
+    item.style.display = name.includes(q.toLowerCase()) || email.includes(q.toLowerCase()) ? 'flex' : 'none';
+  });
+}
+
+// ======================== CHAT ========================
+function goChat(email) {
+  selectedChat = email;
+  renderFriendList();
+  renderChat();
+}
+
+function renderChat() {
+  const placeholder = document.getElementById('chatPlaceholder');
+  const active = document.getElementById('chatActive');
+  if (!selectedChat) {
+    placeholder.style.display = 'flex';
+    active.style.display = 'none';
+    return;
+  }
+  const friends = getFriends();
+  const friend = friends.find(f => f.email === selectedChat);
+  if (!friend) {
+    placeholder.style.display = 'flex';
+    active.style.display = 'none';
+    selectedChat = null;
+    return;
+  }
+  placeholder.style.display = 'none';
+  active.style.display = 'flex';
+  const initial = friend.name.charAt(0).toUpperCase();
+  const avatarStyle = friend.photo
+    ? 'background-image:url(' + friend.photo + ');background-size:cover;background-position:center;'
+    : 'background:linear-gradient(135deg,var(--primary),#6366f1)';
+  document.getElementById('chatAvatar').setAttribute('style', avatarStyle);
+  document.getElementById('chatAvatar').textContent = friend.photo ? '' : initial;
+  document.getElementById('chatName').textContent = friend.name;
+  const msgs = getMessages();
+  const chatMsgs = msgs[selectedChat] || [];
+  const container = document.getElementById('chatMessages');
+  if (chatMsgs.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text2);font-size:13px">💬<br><br>' + escapeHtml(t('msg.bos2')) + '</div>';
+    return;
+  }
+  container.innerHTML = chatMsgs.map(m => {
+    const isSent = m.from === currentUser.email;
+    const time = new Date(m.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    if (m.file) {
+      const label = isSent ? t('msg.dosya_gonderdi') : t('msg.dosya_geldi');
+      return '<div class="msg file-msg ' + (isSent ? 'sent' : 'received') + '" onclick="downloadFile(\'' + escapeHtml(m.file.name) + '\',\'' + escapeHtml(m.file.data) + '\')">' +
+        '<span class="file-icon">📄</span><div class="file-info"><strong>' + escapeHtml(m.file.name) + '</strong><br>' + label + '<br>' + time + '</div></div>';
+    }
+    return '<div class="msg ' + (isSent ? 'sent' : 'received') + '">' + escapeHtml(m.text) + '<div class="time">' + time + '</div></div>';
+  }).join('');
+  container.scrollTop = container.scrollHeight;
+}
+
+function sendMessage() {
+  if (!selectedChat) return;
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const msgs = getMessages();
+  if (!msgs[selectedChat]) msgs[selectedChat] = [];
+  msgs[selectedChat].push({ from: currentUser.email, text, time: Date.now() });
+  setMessages(msgs);
+  input.value = '';
+  renderChat();
+  toast(t('toast.mesaj_gonderildi'));
+}
+
+function attachFileChat() {
+  if (!selectedChat) { toast('Önce bir arkadaş seç', 'error'); return; }
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.onchange = () => {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const msgs = getMessages();
+      if (!msgs[selectedChat]) msgs[selectedChat] = [];
+      msgs[selectedChat].push({
+        from: currentUser.email,
+        text: '',
+        time: Date.now(),
+        file: { name: file.name, data: e.target.result, type: file.type }
+      });
+      setMessages(msgs);
+      renderChat();
+      toast(t('toast.mesaj_gonderildi'));
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+function downloadFile(name, data) {
+  const a = document.createElement('a');
+  a.href = data;
+  a.download = name;
+  a.click();
+}
+
+// ======================== DROP ========================
+function handleDropFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  dropFile = file;
+  renderDropFileInfo();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const zone = document.getElementById('dropZone');
+  if (!zone) return;
+  zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    zone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+    dropFile = file;
+    renderDropFileInfo();
+  });
 });
 
-// Versions
-const versions=["1.8.9","1.9","1.9.4","1.10.2","1.11","1.11.2","1.12","1.12.1","1.12.2","1.13","1.13.1","1.13.2","1.14","1.14.1","1.14.2","1.14.3","1.14.4","1.15","1.15.1","1.15.2","1.16.1","1.16.2","1.16.3","1.16.4","1.16.5","1.17","1.17.1","1.18","1.18.1","1.18.2","1.19","1.19.1","1.19.2","1.19.3","1.19.4","1.20","1.20.1","1.20.2","1.20.3","1.20.4","1.20.5","1.20.6","1.21","1.21.1"];
-const ready=["1.8.9","1.16.5","1.20.1","1.21.1"];
-const el=document.getElementById('vlist');
-versions.forEach(v=>{
-  const a=document.createElement('a');a.className='v'+(ready.includes(v)?' ready':' nope');
-  if(ready.includes(v)){a.href='zerolauncher-'+v+'.jar';a.download='';a.innerHTML=v+' <span>&#11015;</span>'}
-  else a.innerHTML=v+' <span>&mdash;</span>';
-  el.appendChild(a)
+function renderDropFileInfo() {
+  const info = document.getElementById('dropFileInfo');
+  if (!dropFile) { info.style.display = 'none'; document.getElementById('dropSendBtn').disabled = true; return; }
+  info.style.display = 'block';
+  const size = dropFile.size > 1048576 ? (dropFile.size / 1048576).toFixed(1) + ' MB' : (dropFile.size / 1024).toFixed(1) + ' KB';
+  info.innerHTML = '<div class="drop-file-info"><span class="icon">📄</span><div class="info"><div class="name">' + escapeHtml(dropFile.name) + '</div><div class="size">' + size + '</div></div><span class="remove" onclick="dropFile=null;renderDropFileInfo();document.getElementById(\'dropFileInput\').value=\'\'">✕</span></div>';
+  document.getElementById('dropSendBtn').disabled = false;
+}
+
+function renderDropFriends() {
+  const sel = document.getElementById('dropFriendSelect');
+  const friends = getFriends();
+  sel.innerHTML = '<option value="">' + t('drop.sec') + '</option>' + friends.map(f => '<option value="' + f.email + '">' + escapeHtml(f.name) + ' (' + escapeHtml(f.email) + ')</option>').join('');
+}
+
+function sendDrop() {
+  const sel = document.getElementById('dropFriendSelect');
+  const email = sel.value;
+  if (!email) { toast(t('drop.sec_uysari'), 'error'); return; }
+  if (!dropFile) { toast(t('drop.dosya_sec'), 'error'); return; }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const dropHistory = getDropHistory();
+    dropHistory.unshift({
+      to: email,
+      fileName: dropFile.name,
+      fileData: e.target.result,
+      fileType: dropFile.type,
+      time: Date.now()
+    });
+    setDropHistory(dropHistory);
+    // Also send as message
+    const msgs = getMessages();
+    if (!msgs[email]) msgs[email] = [];
+    msgs[email].push({
+      from: currentUser.email,
+      text: '',
+      time: Date.now(),
+      file: { name: dropFile.name, data: e.target.result, type: dropFile.type }
+    });
+    setMessages(msgs);
+    dropFile = null;
+    document.getElementById('dropFileInput').value = '';
+    renderDropFileInfo();
+    renderDropHistory();
+    sel.value = '';
+    toast(t('drop.basari'));
+    if (selectedChat === email) renderChat();
+  };
+  reader.readAsDataURL(dropFile);
+}
+
+function renderDropHistory() {
+  const container = document.getElementById('dropHistory');
+  const history = getDropHistory();
+  if (history.length === 0) {
+    container.innerHTML = '<h4>' + (currentLang === 'tr' ? 'Geçmiş' : 'History') + '</h4><div style="text-align:center;padding:20px;color:var(--text2);font-size:12px">' + t('drop.bos') + '</div>';
+    return;
+  }
+  const friends = getFriends();
+  container.innerHTML = '<h4>' + (currentLang === 'tr' ? 'Geçmiş Gönderiler' : 'Sent Files') + '</h4>' +
+    history.map(d => {
+      const friend = friends.find(f => f.email === d.to);
+      const name = friend ? friend.name : d.to;
+      const time = new Date(d.time).toLocaleDateString();
+      return '<div class="drop-item"><span class="icon">📄</span><div class="info">' +
+        '<div class="name">→ ' + escapeHtml(name) + ': ' + escapeHtml(d.fileName) + '</div>' +
+        '<div class="meta">' + time + '</div></div></div>';
+    }).join('');
+}
+
+// ======================== UTILS ========================
+function escapeHtml(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ======================== INIT ========================
+(function init() {
+  const saved = getUser();
+  if (saved) {
+    currentUser = saved;
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('appScreen').classList.add('active');
+    updateProfileUI();
+    renderFriends();
+    renderFriendList();
+    renderDropFriends();
+    renderDropHistory();
+    applyLang();
+    applyTheme();
+    goPage('messages');
+  } else {
+    document.getElementById('loginScreen').classList.remove('hidden');
+    applyLang();
+    applyTheme();
+  }
+})();
+
+// Close modal on overlay click
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
 });
 </script>
 </body>
