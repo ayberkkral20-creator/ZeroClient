@@ -44,17 +44,6 @@ h1:hover{filter:brightness(1.2)}
 .info-card .row .value{font-weight:600}
 .info-card .row .value strong{color:var(--accent)}
 .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;background:color-mix(in srgb,var(--success) 10%,transparent);color:var(--success)}
-.section-title{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;text-align:left}
-.version-list{display:flex;flex-wrap:wrap;gap:5px;background:var(--card-bg);backdrop-filter:blur(6px);border:1px solid var(--card-border);border-radius:12px;padding:14px;max-height:200px;overflow-y:auto;margin-bottom:16px;transition:all .3s}
-.version-list:hover{border-color:color-mix(in srgb,var(--accent) 10%,transparent);box-shadow:0 4px 12px var(--accent-glow)}
-.version-list .v{display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:5px;font-size:10px;font-weight:600;text-decoration:none;background:color-mix(in srgb,var(--accent) 4%,transparent);border:1px solid color-mix(in srgb,var(--accent) 4%,transparent);color:var(--text);transition:all .25s}
-.version-list .v.ready{background:color-mix(in srgb,var(--success) 8%,transparent);border-color:color-mix(in srgb,var(--success) 8%,transparent);color:var(--success)}
-.version-list .v.ready:hover{transform:var(--hover-lift);border-color:color-mix(in srgb,var(--success) 25%,transparent);box-shadow:0 4px 12px rgba(34,197,94,.12)}
-.version-list .v.nope{opacity:.3;cursor:default}
-footer{text-align:center;font-size:10px;color:var(--muted);opacity:.4;margin-top:20px}
-.version-list::-webkit-scrollbar{width:4px}
-.version-list::-webkit-scrollbar-track{background:transparent}
-.version-list::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--accent) 15%,transparent);border-radius:4px}
 
 /* Uyari button & message */
 .uyari-btn{display:block;width:100%;padding:12px;border-radius:10px;background:color-mix(in srgb,#fbbf24 6%,transparent);border:1px solid color-mix(in srgb,#fbbf24 10%,transparent);color:#fbbf24;font-size:12px;font-weight:700;cursor:pointer;transition:all .3s;text-align:center;margin-bottom:0}
@@ -116,9 +105,6 @@ footer{text-align:center;font-size:10px;color:var(--muted);opacity:.4;margin-top
     <div class="row"><span class="label">Kurulum</span><span class="value">Indir &rarr; Calistir &rarr; Oyna</span></div>
   </div>
 
-  <div class="section-title">&#10022; Surumler</div>
-  <div class="version-list" id="vlist"></div>
-
   <div class="info-card" style="border-color:color-mix(in srgb,#a855f7 8%,transparent)">
     <div style="font-size:11px;color:var(--muted);line-height:1.7">
       <strong style="color:#a855f7">&#128100; Skinli Hesap istiyorsan</strong>
@@ -169,17 +155,6 @@ lx.textAlign='center';lx.textBaseline='middle';lx.fillText('Z',22,23);
 // Uyari toggle
 document.getElementById('uyariBtn').addEventListener('click',function(){
   document.getElementById('uyariMsg').classList.toggle('open');
-});
-
-// Versions
-const versions=["1.8.9","1.9","1.9.4","1.10.2","1.11","1.11.2","1.12","1.12.1","1.12.2","1.13","1.13.1","1.13.2","1.14","1.14.1","1.14.2","1.14.3","1.14.4","1.15","1.15.1","1.15.2","1.16.1","1.16.2","1.16.3","1.16.4","1.16.5","1.17","1.17.1","1.18","1.18.1","1.18.2","1.19","1.19.1","1.19.2","1.19.3","1.19.4","1.20","1.20.1","1.20.2","1.20.3","1.20.4","1.20.5","1.20.6","1.21","1.21.1"];
-const ready=["1.8.9","1.16.5","1.20.1","1.21.1"];
-const el=document.getElementById('vlist');
-versions.forEach(v=>{
-  const a=document.createElement('a');a.className='v'+(ready.includes(v)?' ready':' nope');
-  if(ready.includes(v)){a.innerHTML=v+' <span>&#11015;</span>';a.href='https://gofile.io/d/SvNAN0';a.target='_blank'}
-  else a.innerHTML=v+' <span>&mdash;</span>';
-  el.appendChild(a)
 });
 </script>
 </body>
